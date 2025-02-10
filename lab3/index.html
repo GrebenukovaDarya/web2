@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="style.css">
+    <title> LAB3 </title>
+  </head>
+
+  <body>
+    
+    <div class="formstyle" >
+    <div id="form"> <h2> ФОРМА </h2> 
+    <form id="myform" class="formcarryForm" action="URL_отправки_данных" method="POST">
+
+    <label> 
+      ФИО: <br/>
+      <input name="field-name-1" />
+    </label> <br/>
+
+    <label> 
+      Номер телефона: <br />
+      <input name="field-number" 
+        type="tel" />
+    </label> <br/>
+
+    <label>
+      E-mail: <br/>
+      <input name="field-email"
+        type="email" />
+    </label> <br/>
+
+    <label> 
+      Дата рождения: <br/>
+      <input name="field-date"
+        type="date" />
+    </label> <br/>
+
+    Пол: <br /> 
+    <label> <input type="radio" checked="checked" 
+      name="radio-group-1" value="1" /> Мужской </label>
+    <label> <input type="radio"  name="radio-group-1" 
+      value="2" /> Женский</label> <br/>
+
+    <label> 
+      Любимый язык программирования: <br/>
+      <select id="field-language" name="field-language"
+        multiple="multiple">
+        <option value="Pascal"> Pascal</option>
+        <option value="C"> C</option>
+        <option value="C++"> C++ </option>
+        <option value="Python"> Python</option>
+        <option value="Java"> Java</option>
+        <option value="JavaScript"> JavaScript</option>
+        <option value="PHP"> PHP</option>
+        <option value="Clojure"> Clojure</option>
+        <option value="Haskel"> Haskel</option>
+        <option value="Prolog"> Prolog</option>
+        <option value="Scala"> Scala</option>
+      </select>
+    </label> <br/>
+
+    <label>
+      Биография: <br/>
+      <textarea name="field-biography"> </textarea>
+    </label> <br/>
+
+    <label> <input type="checkbox" name="check" /> 
+      С контрактом ознакомлен 
+    </label> <br/>
+
+    <input type="submit" value="Сохранить"/> 
+    </form>
+  </div>
+</div>
+
+  
+  </body>
+</html>
+
