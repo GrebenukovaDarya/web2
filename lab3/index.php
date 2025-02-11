@@ -87,7 +87,8 @@ foreach ($languages as $language) {
     $stmt_insert->execute([$id, $id_lang]);
   }
 }
-} catch (PDOException $e) {
+} 
+catch (PDOException $e) {
   print('Error : ' . $e->getMessage());
   exit();
 }
@@ -98,7 +99,8 @@ $data = array( 'fio' => $name, 'num' => $num, 'email' => $email, 'bdate' => $bda
 $stmt = $db->prepare("INSERT INTO $table_app (fio, num, email, bdate, gender, biography, checkbox ) 
 values (:fio, :num, :email, :bdate, :gender, :biography, :checkbox )");
 $stmt->execute($data)
-} catch (PDOException $e) {
+} 
+catch (PDOException $e){
   print('Error : ' . $e->getMessage());
   exit();
 }
