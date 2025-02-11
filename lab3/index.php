@@ -18,7 +18,7 @@ $email = $_POST['email'];
 $bdate = $_POST['birthdate'];
 $biography = $_POST['biography'];
 $gen = $_POST['radio-group-1'];
-$checkbox= $_POST['checkbox'];
+//$checkbox= $_POST['checkbox'];
 $languages = $_POST['languages'] ?? []; 
 
 $errors = FALSE;
@@ -76,7 +76,18 @@ $table_lang = 'prog_lang';
 $table_ul='user_lang';
 
 try{
-  $id=lastInsertId();
+  $data = array( 'fio' => $name, 'num' => $num, 'email' => $email, 'bdate' => $bdate, 'gen' => $gen, 'biography' => $biography, 'checkbox' => $checkbox); 
+  $stmt = $db->prepare("INSERT INTO $table_app (fio, num, email, bdate, gender, biography, checkbox ) values (:fio, :num, :email, :bdate, :gender, :biography, :checkbox )");
+  $stmt->execute($data);
+} 
+catch (PDOException $e){
+  print('Error : ' . $e->getMessage());
+  exit();
+}
+
+$id=$db->lastInsertId();
+try{
+ 
   $stmt_select = $db->prepare("SELECT id_lang FROM prog_lang WHERE lang_name = ?");
   $stmt_insert = $db->prepare("INSERT INTO user_lang (id, id_lang) VALUES (?, ?)");
   foreach ($languages as $language) {
@@ -93,14 +104,5 @@ catch (PDOException $e) {
   exit();
 }
 
-try{
-  $data = array( 'fio' => $name, 'num' => $num, 'email' => $email, 'bdate' => $bdate, 'gen' => $gen, 'biography' => $biography, 'checkbox' => $checkbox); 
-  $stmt = $db->prepare("INSERT INTO $table_app (fio, num, email, bdate, gender, biography, checkbox ) values (:fio, :num, :email, :bdate, :gender, :biography, :checkbox )");
-  $stmt->execute($data)
-} 
-catch (PDOException $e){
-  print('Error : ' . $e->getMessage());
-  exit();
-}
 
 header('Location: ?save=1');
