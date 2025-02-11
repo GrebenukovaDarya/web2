@@ -76,7 +76,7 @@ $table_lang = 'prog_lang';
 $table_ul='user_lang';
 
 try{
-  $data = array( 'fio' => $name, 'num' => $num, 'email' => $email, 'bdate' => $bdate, 'gen' => $gen, 'biography' => $biography, 'checkbox' => $checkbox); 
+  $data = array( 'fio' => $fio, 'num' => $num, 'email' => $email, 'bdate' => $bdate, 'gen' => $gen, 'biography' => $biography, 'checkbox' => $_POST["checkbox"]); 
   $stmt = $db->prepare("INSERT INTO $table_app (fio, num, email, bdate, gender, biography, checkbox ) values (:fio, :num, :email, :bdate, :gender, :biography, :checkbox )");
   $stmt->execute($data);
 } 
