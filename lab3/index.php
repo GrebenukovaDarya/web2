@@ -32,7 +32,7 @@ if (empty($fio)) {
   $errors = TRUE;
 }
 
-if (empty() || !is_numeric($_POST['number']) || !preg_match('/^\d+$/', $num)) {
+if (empty($num) || !is_numeric($num)) {
   print('Номер не указан, либо указан некорректно.<br/>');
   $errors = TRUE;
 }
