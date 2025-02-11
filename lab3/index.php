@@ -76,9 +76,9 @@ $table_lang = 'prog_lang';
 $table_ul='user_lang';
 
 try{
-  $data = array( 'fio' => $fio, 'num' => $num, 'email' => $email, 'bdate' => $bdate, 'gen' => $gen, 'biography' => $biography, 'checkbox' => $_POST["checkbox"]); 
-  $stmt = $db->prepare("INSERT INTO $table_app (fio, num, email, bdate, gender, biography, checkbox ) values (:fio, :num, :email, :bdate, :gender, :biography, :checkbox )");
-  $stmt->execute($data);
+  //$data = array( 'fio' => $fio, 'num' => $num, 'email' => $email, 'bdate' => $bdate, 'gen' => $gen, 'biography' => $biography, 'checkbox' => $_POST["checkbox"]); 
+  $stmt = $db->prepare("INSERT INTO application (fio, number, email, bdate, gender, biography, checkbox ) values (?, ?, ?, ?, ?, ?, ? )");
+  $stmt->execute([$_POST['fio'], $_POST['number'], $_POST['email'], $_POST['birthdate'], $_POST['radio-group-1'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0]);
 } 
 catch (PDOException $e){
   print('Error : ' . $e->getMessage());
