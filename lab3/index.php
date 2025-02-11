@@ -1,53 +1,81 @@
 <?php
-// Отправляем браузеру правильную кодировку,
-// файл index.php должен быть в кодировке UTF-8 без BOM.
-header('Content-Type: text/html; charset=UTF-8');
 
-// В суперглобальном массиве $_SERVER PHP сохраняет некторые заголовки запроса HTTP
-// и другие сведения о клиненте и сервере, например метод текущего запроса $_SERVER['REQUEST_METHOD'].
+header('Content-Type: text/html; charset=UTF-8');
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-  // В суперглобальном массиве $_GET PHP хранит все параметры, переданные в текущем запросе через URL.
+
   if (!empty($_GET['save'])) {
-    // Если есть параметр save, то выводим сообщение пользователю.
     print('Спасибо, результаты сохранены.');
   }
-  // Включаем содержимое файла form.php.
+
   include('form.php');
-  // Завершаем работу скрипта.
   exit();
 }
-// Иначе, если запрос был методом POST, т.е. нужно проверить данные и сохранить их в БД.
 
-// Проверяем ошибки.
+
+$fio = $_POST['fio'];
+$num = $_POST['number'];
+$email = $_POST['email'];
+$bdate = $_POST['birthdate'];
+$biography = $_POST['biography'];
+$gen = $_POST['radio-group-1'];
+$checkbox= $_POST['checkbox'];
+$languages = $_POST['languages'] ?? []; 
+
 $errors = FALSE;
-if (empty($_POST['fio'])) {
+
+
+if (empty($fio)) {
   print('Заполните имя.<br/>');
   $errors = TRUE;
-}
-
-if (empty($_POST['year']) || !is_numeric($_POST['year']) || !preg_match('/^\d+$/', $_POST['year'])) {
-  print('Заполните год.<br/>');
+} elseif (strlen($fio) > 128 || !preg_match('/^[a-zA-Zа-яА-ЯёЁ\s]+$/u', $fio)) {
+  print('Введенное имя указано некорректно.<br/>');
   $errors = TRUE;
 }
 
-
-// *************
-// Тут необходимо проверить правильность заполнения всех остальных полей.
-// *************
-
-if ($errors) {
-  // При наличии ошибок завершаем работу скрипта.
-  exit();
+if (empty() || !is_numeric($_POST['number']) || !preg_match('/^\d+$/', $num)) {
+  print('Номер не указан, либо указан некорректно.<br/>');
+  $errors = TRUE;
 }
 
-// Сохранение в базу данных.
+if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  print('Введенный email указан некорректно.<br/>');
+  $errors = TRUE;
+}
 
-$user = 'u68607'; // Заменить на ваш логин uXXXXX
-$pass = '7232008'; // Заменить на пароль
+if (empty($_POST['biography'])) {
+  print('Заполните биографию.<br/>');
+  $errors = TRUE;
+}
+
+if(empty($languages)) {
+  print('Укажите любимый(ые) язык(и) программирования.<br/>');
+  $errors = TRUE;
+}
+
+if(empty($bdate)) {
+  print('Введите дату рождения.<br/>');
+  $errors = TRUE;
+}
+
+if (!isset($checkbox)) {
+  print('Подтвердите, что вы ознакомлены с контрактом.<br/>');
+  $errors = TRUE;
+}
+
+if ($errors) {
+  exit();
+}
+//
+
+$user = 'u68607';
+$pass = '7232008';
 $db = new PDO('mysql:host=localhost;dbname=u68607', $user, $pass,
-  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
+  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+$table_app = 'application';
+$table_lang = 'prog_lang';
+$table_ul='user_lang';
 
-// Подготовленный запрос. Не именованные метки.
+/*
 try {
   $stmt = $db->prepare("INSERT INTO application SET name = ?");
   $stmt->execute([$_POST['fio']]);
@@ -56,25 +84,28 @@ catch(PDOException $e){
   print('Error : ' . $e->getMessage());
   exit();
 }
+  */
 
-//  stmt - это "дескриптор состояния".
- 
-//  Именованные метки.
-//$stmt = $db->prepare("INSERT INTO test (label,color) VALUES (:label,:color)");
-//$stmt -> execute(['label'=>'perfect', 'color'=>'green']);
- 
-//Еще вариант
-/*$stmt = $db->prepare("INSERT INTO users (firstname, lastname, email) VALUES (:firstname, :lastname, :email)");
-$stmt->bindParam(':firstname', $firstname);
-$stmt->bindParam(':lastname', $lastname);
-$stmt->bindParam(':email', $email);
-$firstname = "John";
-$lastname = "Smith";
-$email = "john@test.com";
-$stmt->execute();
-*/
+//
+$id=lastInsertId();
+$stmt_select = $db->prepare("SELECT id_lang FROM prog_lang WHERE lang_name = ?");
+$stmt_insert = $db->prepare("INSERT INTO user_lang (id, id_lang) VALUES (?, ?)");
+foreach ($languages as $language) {
+  $stmt_select ->execute([$language]);
+  $id_lang = $stmt_select->fetchColumn();
+  
+  if ($id_lang) {
+    $stmt_insert->execute([$id, $id_lang]);
+  }
+}
 
-// Делаем перенаправление.
-// Если запись не сохраняется, но ошибок не видно, то можно закомментировать эту строку чтобы увидеть ошибку.
-// Если ошибок при этом не видно, то необходимо настроить параметр display_errors для PHP.
+
+$data = array( 'fio' => $name, 'num' => $num, 'email' => $email, 'bdate' => $bdate,
+'gen' => $gen, 'biography' => $biography, 'checkbox' => $checkbox); 
+
+$stmt = $db->prepare("INSERT INTO $table_app (fio, num, email, bdate, gender, biography, checkbox ) 
+values (:fio, :num, :email, :bdate, :gender, :biography, :checkbox )");
+
+$stmt->execute($data)
+
 header('Location: ?save=1');

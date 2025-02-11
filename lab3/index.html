@@ -11,43 +11,37 @@
   <body>
     
     <div class="formstyle" > 
-    <form id="myform" class="formcarryForm" action="URL_отправки_данных" method="POST">
+    <form id="myform" class="formcarryForm" action="index.php" method="POST">
 
       <h2> ФОРМА </h2> 
 
     <label> 
       ФИО: <br/>
-      <input name="field-name-1" />
+      <input name="fio" />
     </label> <br/>
 
     <label> 
       Номер телефона: <br />
-      <input name="field-number" 
-        type="tel" />
+      <input name="number" type="tel" />
     </label> <br/>
 
     <label>
       E-mail: <br/>
-      <input name="field-email"
-        type="email" />
+      <input name="email" type="email" />
     </label> <br/>
 
     <label> 
       Дата рождения: <br/>
-      <input name="field-date"
-        type="date" />
+      <input name="birthdate" type="date" />
     </label> <br/>
 
     Пол: <br /> 
-    <label> <input type="radio" checked="checked" 
-      name="radio-group-1" value="1" /> Мужской </label>
-    <label> <input type="radio"  name="radio-group-1" 
-      value="2" /> Женский</label> <br/>
+    <label> <input type="radio" checked="checked" name="radio-group-1" value="male" /> Мужской </label>
+    <label> <input type="radio"  name="radio-group-1" value="female" /> Женский</label> <br/>
 
     <label > 
       Любимый язык программирования: <br/>
-      <select  name="field-language"
-        multiple="multiple">
+      <select  name="languages[]" multiple="multiple">
         <option value="Pascal"> Pascal</option>
         <option value="C"> C</option>
         <option value="C++"> C++ </option>
@@ -59,15 +53,16 @@
         <option value="Haskel"> Haskel</option>
         <option value="Prolog"> Prolog</option>
         <option value="Scala"> Scala</option>
+        <option value="Go"> Go</option>
       </select>
     </label> <br/>
 
     <label>
       Биография: <br/>
-      <textarea name="field-biography"> </textarea>
+      <textarea name="biography"> </textarea>
     </label> <br/>
 
-    <label> <input type="checkbox" name="check" /> 
+    <label> <input type="checkbox" name="checkbox" /> 
       С контрактом ознакомлен 
     </label> <br/>
 
