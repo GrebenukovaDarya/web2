@@ -57,7 +57,7 @@ if(empty($bdate)) {
   $errors = TRUE;
 }
 
-if (!isset($checkbox)) {
+if (!isset($_POST["checkbox"])) {
   print('Подтвердите, что вы ознакомлены с контрактом.<br/>');
   $errors = TRUE;
 }
