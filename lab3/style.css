@@ -45,6 +45,11 @@ select{
     scrollbar-width: thin;
 }
 
+.numtext{
+    font-size: 12px;
+    text-decoration: underline;
+}
+
 @font-face {
     font-family: "Mac";
     src: url("Kanit-Cyrillic.ttf") format("truetype");
