@@ -79,9 +79,7 @@
 
       <label>
         Биография: <br/>
-        <textarea name="biography" <?php if ($errors['bio']) {print 'class="error"';} ?>> 
-         <?php print $values['bio']; ?>"
-        </textarea>
+        <textarea name="biography" <?php if ($errors['bio']) {print 'class="error"';} ?>><?php print $values['bio']; ?></textarea>
       </label> <br/>
 
       <label class="form-checkbox pl-2">
