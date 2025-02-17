@@ -19,6 +19,7 @@ $bdate = $_POST['birthdate'];
 $biography = $_POST['biography'];
 $gen = $_POST['radio-group-1'];
 //$checkbox= $_POST['checkbox'];
+$allowed_lang = ["Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Clojure", "Haskel", "Prolog", "Scala", "Go"];
 $languages = $_POST['languages'] ?? []; 
 
 $errors = FALSE;
@@ -27,13 +28,16 @@ $errors = FALSE;
 if (empty($fio)) {
   print('Заполните имя.<br/>');
   $errors = TRUE;
-} elseif (strlen($fio) > 128 || !preg_match('/^[a-zA-Zа-яА-ЯёЁ\s]+$/u', $fio)) {
-  print('Введенное имя указано некорректно.<br/>');
+} elseif (strlen($fio) > 128 ) {
+  print('Введенное имя указано некорректно. Имя не должно превышать 128 символов.<br/>');
+  $errors = TRUE;
+} elseif ( !preg_match('/^[a-zA-Zа-яА-ЯёЁ\s]+$/u', $fio)) {
+  print('Введенное имя указано некорректно. Имя должно содержать только буквы и пробелы.<br/>');
   $errors = TRUE;
 }
 
-if (empty($num) || !is_numeric($num)) {
-  print('Номер не указан, либо указан некорректно. Указываемый номер должен содерать 10 цифр.<br/>');
+if (empty($num) || !preg_match('/^\+7\d{10}$/', $num)) {
+  print('Номер не указан, либо указан некорректно.<br/>');
   $errors = TRUE;
 }
 
@@ -42,14 +46,37 @@ if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
   $errors = TRUE;
 }
 
-if (empty($_POST['biography'])) {
+
+if (empty($gen)){
+  print ('Укажите пол.<br/>');
+  $errors = TRUE;
+}
+else{
+  $allowed_genders = ["male", "female"];
+  if (!in_array($gen, $allowed_genders)) {
+    print('Указан недопустимый пол.<br/>');
+    $errors = TRUE;
+  }
+}
+
+if (empty($biography)) {
   print('Заполните биографию.<br/>');
+  $errors = TRUE;
+} elseif(strlen($biography) > 512){
+  print('Количество символов в поле "биография" не должно превышать 512.<br/>');
   $errors = TRUE;
 }
 
 if(empty($languages)) {
   print('Укажите любимый(ые) язык(и) программирования.<br/>');
   $errors = TRUE;
+} else {
+  foreach ($languages as $lang) {
+    if (!in_array($lang, $allowed_lang)) {
+        print('Указан недопустимый язык ($lang).<br/>');
+        $errors = TRUE;
+    }
+  }
 }
 
 if(empty($bdate)) {
