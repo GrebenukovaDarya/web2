@@ -8,17 +8,17 @@
   </head>
   <body>
 
-    <div class="error_messages" <?php empty($messages)?{print 'display="none"';}:{print 'display="block"';} ?>>
+    <div class="error_messages" <?php if (empty($messages)) {print 'display="none"';} else {print 'display="block"';} ?>>
 
-    <?php
-    if (!empty($messages)) {
-      print('<div id="messages">');
-      foreach ($messages as $message) {
-        print($message);
+      <?php
+      if (!empty($messages)) {
+        print('<div id="messages">');
+        foreach ($messages as $message) {
+          print($message);
+        }
+        print('</div>');
       }
-      print('</div>');
-    }
-    ?>
+      ?>
 
     </div>
     
