@@ -11,30 +11,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   }
 
   $errors = array();
-  $errors['fio'] = !empty($_COOKIE['fio_error']);
+  $errors['fio1'] = !empty($_COOKIE['fio_error1']);
+  $errors['fio2'] = !empty($_COOKIE['fio_error1']);
+  $errors['fio3'] = !empty($_COOKIE['fio_error1']);
   $errors['number'] = !empty($_COOKIE['number_error']);
   $errors['email'] = !empty($_COOKIE['email_error']);
-  $errors['bio'] = !empty($_COOKIE['bio_error']);
-  $errors['gen'] = !empty($_COOKIE['gen_error']);
-  $errors['lang'] = !empty($_COOKIE['lang_error']);
+  $errors['bio1'] = !empty($_COOKIE['bio_error1']);
+  $errors['bio2'] = !empty($_COOKIE['bio_error2']);
+  $errors['gen1'] = !empty($_COOKIE['gen_error1']);
+  $errors['gen2'] = !empty($_COOKIE['gen_error2']);
+  $errors['lang1'] = !empty($_COOKIE['lang_error1']);
+  $errors['lang2'] = !empty($_COOKIE['lang_error2']);
   $errors['bdate'] = !empty($_COOKIE['bdate_error']);
   $errors['checkbox'] = !empty($_COOKIE['checkbox_error']);
 
 
-   if ($errors['fio']) {
-    setcookie('fio_error', '', 100000);
+   if ($errors['fio1']) {
+    setcookie('fio_error1', '', 100000);
     setcookie('fio_value', '', 100000);
-
-    if(getcookie('fio_error')=='1'){
-      $messages[] = '<div class="error">Заполните имя.</div>';
-    }
-    elseif(getcookie('fio_error')=='2'){
-      $messages[] = '<div class="error">Введенное имя указано некорректно. Имя не должно превышать 128 символов.</div>';
-    }
-    else{
-      $messages[] = '<div class="error">Введенное имя указано некорректно. Имя должно содержать только буквы и пробелы.</div>';
-    }
-  }
+    $messages[] = '<div class="error">Заполните имя.</div>';
+   }
+   if ($errors['fio2']) {
+    setcookie('fio_error2', '', 100000);
+    setcookie('fio_value', '', 100000);
+    $messages[] = '<div class="error">Введенное имя указано некорректно. Имя не должно превышать 128 символов.</div>';
+   }
+   if ($errors['fio3']) {
+    setcookie('fio_error3', '', 100000);
+    setcookie('fio_value', '', 100000);
+    $messages[] = '<div class="error">Введенное имя указано некорректно. Имя должно содержать только буквы и пробелы.</div>';
+   }
 
   if ($errors['number']) {
     setcookie('number_error', '', 100000);
@@ -48,40 +54,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $messages[] = '<div class="error">Введенный email указан некорректно.</div>';
   }
 
-  if ($errors['gen']) {
-    setcookie('gen_error', '', 100000);
+  if ($errors['gen1']) {
+    setcookie('gen_error1', '', 100000);
     setcookie('gen_value', '', 100000);
-
-    if(getcookie('gen_error')=='1'){
-      $messages[] = '<div class="error">Укажите пол.</div>';
-    }
-    else{
-      $messages[] = '<div class="error">Указан недопустимый пол.</div>';
-    }
+    $messages[] = '<div class="error">Укажите пол.</div>';
+  }
+  if ($errors['gen2']) {
+    setcookie('gen_error2', '', 100000);
+    setcookie('gen_value', '', 100000);
+    $messages[] = '<div class="error">Указан недопустимый пол.</div>';
   }
 
-  if ($errors['bio']) {
-    setcookie('bio_error', '', 100000);
+  if ($errors['bio1']) {
+    setcookie('bio_error1', '', 100000);
     setcookie('bio_value', '', 100000);
-
-    if(getcookie('bio_error')=='1'){
-      $messages[] = '<div class="error">Заполните биографию.</div>';
-    }
-    else{
-      $messages[] = '<div class="error">Количество символов в поле "биография" не должно превышать 512.</div>';
-    }
+    $messages[] = '<div class="error">Заполните биографию.</div>';
+  }
+  if ($errors['bio2']) {
+    setcookie('bio_error2', '', 100000);
+    setcookie('bio_value', '', 100000);
+    $messages[] = '<div class="error">Количество символов в поле "биография" не должно превышать 512.</div>';
   }
 
-  if ($errors['lang']) {
-    setcookie('lang_error', '', 100000);
+  if ($errors['lang1']) {
+    setcookie('lang_error1', '', 100000);
     setcookie('lang_value', '', 100000);
-
-    if(getcookie('lang_error')=='1'){
-      $messages[] = '<div class="error">Укажите любимый(ые) язык(и) программирования.</div>';
-    }
-    else{
-      $messages[] = '<div class="error">Указан недопустимый язык.</div>';
-    }
+    $messages[] = '<div class="error">Укажите любимый(ые) язык(и) программирования.</div>';
+  }
+  if ($errors['lang2']) {
+    setcookie('lang_error2', '', 100000);
+    setcookie('lang_value', '', 100000);
+    $messages[] = '<div class="error">Указан недопустимый язык.</div>';
   }
 
   if ($errors['bdate']) {
@@ -129,15 +132,15 @@ else {
 
   if (empty($fio)) {
     //print('Заполните имя.<br/>');
-    setcookie('fio_error', '1', time() + 24 * 60 * 60);
+    setcookie('fio_error1', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   } elseif (strlen($fio) > 128 ) {
     //print('Введенное имя указано некорректно. Имя не должно превышать 128 символов.<br/>');
-    setcookie('fio_error', '2', time() + 24 * 60 * 60);
+    setcookie('fio_error2', '2', time() + 24 * 60 * 60);
     $errors = TRUE;
   } elseif ( !preg_match('/^[a-zA-Zа-яА-ЯёЁ\s]+$/u', $fio)) {
     //print('Введенное имя указано некорректно. Имя должно содержать только буквы и пробелы.<br/>');
-    setcookie('fio_error', '3', time() + 24 * 60 * 60);
+    setcookie('fio_error3', '3', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
   setcookie('fio_value', $fio, time() + 365 * 24 * 60 * 60);
@@ -159,13 +162,13 @@ else {
 
   if (empty($gen)){
     //print ('Укажите пол.<br/>');
-    setcookie('gen_error', '1', time() + 24 * 60 * 60);
+    setcookie('gen_error1', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
   else{
     $allowed_genders = ["male", "female"];
     if (!in_array($gen, $allowed_genders)) {
-      setcookie('gen_error', '2', time() + 24 * 60 * 60);
+      setcookie('gen_error2', '2', time() + 24 * 60 * 60);
       //print('Указан недопустимый пол.<br/>');
       $errors = TRUE;
     }
@@ -174,24 +177,24 @@ else {
 
   if (empty($biography)) {
     //print('Заполните биографию.<br/>');
-    setcookie('bio_error', '1', time() + 24 * 60 * 60);
+    setcookie('bio_error1', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   } elseif(strlen($biography) > 512){
     //print('Количество символов в поле "биография" не должно превышать 512.<br/>');
-    setcookie('bio_error', '2', time() + 24 * 60 * 60);
+    setcookie('bio_error2', '2', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
   setcookie('bio_value', $gen, time() + 365 * 24 * 60 * 60);
 
   if(empty($languages)) {
     //print('Укажите любимый(ые) язык(и) программирования.<br/>');
-    setcookie('lang_error', '1', time() + 24 * 60 * 60);
+    setcookie('lang_error1', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   } else {
     foreach ($languages as $lang) {
       if (!in_array($lang, $allowed_lang)) {
           //print('Указан недопустимый язык ($lang).<br/>');
-          setcookie('lang_error', '2', time() + 24 * 60 * 60);
+          setcookie('lang_error2', '2', time() + 24 * 60 * 60);
           $errors = TRUE;
       }
     }
@@ -217,12 +220,17 @@ else {
     exit();
   }
   else {
-    setcookie('fio_error', '', 100000);
+    setcookie('fio_error1', '', 100000);
+    setcookie('fio_error2', '', 100000);
+    setcookie('fio_error3', '', 100000);
     setcookie('number_error', '', 100000);
     setcookie('email_error', '', 100000);
-    setcookie('bio_error', '', 100000);
-    setcookie('gen_error', '', 100000);
-    setcookie('lang_error', '', 100000);
+    setcookie('bio_error1', '', 100000);
+    setcookie('bio_error2', '', 100000);
+    setcookie('gen_error1', '', 100000);
+    setcookie('gen_error2', '', 100000);
+    setcookie('lang_error1', '', 100000);
+    setcookie('lang_error2', '', 100000);
     setcookie('checkbox_error', '', 100000);
     setcookie('bdate_error', '', 100000);
   }
