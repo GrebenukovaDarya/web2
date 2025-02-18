@@ -69,17 +69,17 @@
         <select  name="languages[]" multiple="multiple" 
         <?php if ($errors['lang1'] || $errors['lang2']) {print 'class="error"';} ?> >
           <option value="Pascal" <?php if(in_array('Pascal', $user_languages)) {print 'selected="selected"';}?>> Pascal</option>
-          <option value="C"> C</option>
-          <option value="C++"> C++ </option>
-          <option value="Python"> Python</option>
-          <option value="Java"> Java</option>
-          <option value="JavaScript"> JavaScript</option>
-          <option value="PHP"> PHP</option>
-          <option value="Clojure"> Clojure</option>
-          <option value="Haskel"> Haskel</option>
-          <option value="Prolog"> Prolog</option>
-          <option value="Scala"> Scala</option>
-          <option value="Go"> Go</option>
+          <option value="C" <?php if(in_array('C', $user_languages)) {print 'selected="selected"';}?>> C</option>
+          <option value="C++" <?php if(in_array('C++', $user_languages)) {print 'selected="selected"';}?>> C++ </option>
+          <option value="Python" <?php if(in_array('Python', $user_languages)) {print 'selected="selected"';}?>> Python</option>
+          <option value="Java" <?php if(in_array('Java', $user_languages)) {print 'selected="selected"';}?>> Java</option>
+          <option value="JavaScript" <?php if(in_array('JavaScript', $user_languages)) {print 'selected="selected"';}?>> JavaScript</option>
+          <option value="PHP" <?php if(in_array('PHP', $user_languages)) {print 'selected="selected"';}?>> PHP</option>
+          <option value="Clojure" <?php if(in_array('Clojure', $user_languages)) {print 'selected="selected"';}?>> Clojure</option>
+          <option value="Haskel" <?php if(in_array('Haskel', $user_languages)) {print 'selected="selected"';}?>> Haskel</option>
+          <option value="Prolog" <?php if(in_array('Prolog', $user_languages)) {print 'selected="selected"';}?>> Prolog</option>
+          <option value="Scala" <?php if(in_array('Scala', $user_languages)) {print 'selected="selected"';}?>> Scala</option>
+          <option value="Go" <?php if(in_array('Go', $user_languages)) {print 'selected="selected"';}?>> Go</option>
         </select>
       </label> <br/>
 
