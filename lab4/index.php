@@ -196,7 +196,7 @@ else {
       }
     }
   }
-  setcookie('lang_value', $languages, time() + 365 * 24 * 60 * 60);
+  setcookie('lang_value', $_POST['languages'], time() + 365 * 24 * 60 * 60);
 
   if(empty($bdate)) {
     //print('Введите дату рождения.<br/>');
