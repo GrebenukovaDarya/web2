@@ -184,7 +184,7 @@ else {
     setcookie('bio_error2', '2', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
-  setcookie('bio_value', $bio, time() + 365 * 24 * 60 * 60);
+  setcookie('bio_value', $biography, time() + 365 * 24 * 60 * 60);
 
   if(empty($languages)) {
     //print('Укажите любимый(ые) язык(и) программирования.<br/>');
@@ -199,7 +199,7 @@ else {
       }
     }
   }
-  $langs_value =(implode(",", $array));
+  $langs_value =(implode(",", $languages));
   setcookie('lang_value', $langs_value, time() + 365 * 24 * 60 * 60);
 
   if(empty($bdate)) {
