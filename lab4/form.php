@@ -84,7 +84,7 @@
 
       <label class="form-checkbox pl-2">
         <input type="checkbox" name="checkbox"
-        <?php if ($errors['checkbox']) {print 'class="error"';} ?> value="<?php print $values['checkbox']; ?>"/> 
+        <?php if ($errors['checkbox']) {print 'class="error"';} ?>  checked="<?php if (!$errors['checkbox']) {print 'checked';} ?>"/> 
         С контрактом ознакомлен 
       </label> <br/>
 
