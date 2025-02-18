@@ -25,10 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('fio_error', '', 100000);
     setcookie('fio_value', '', 100000);
 
-    if(getCookie('fio_error')=='1'){
+    if(getcookie('fio_error')=='1'){
       $messages[] = '<div class="error">Заполните имя.</div>';
     }
-    elseif(getCookie('fio_error')=='2'){
+    elseif(getcookie('fio_error')=='2'){
       $messages[] = '<div class="error">Введенное имя указано некорректно. Имя не должно превышать 128 символов.</div>';
     }
     else{
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('gen_error', '', 100000);
     setcookie('gen_value', '', 100000);
 
-    if(getCookie('gen_error')=='1'){
+    if(getcookie('gen_error')=='1'){
       $messages[] = '<div class="error">Укажите пол.</div>';
     }
     else{
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('bio_error', '', 100000);
     setcookie('bio_value', '', 100000);
 
-    if(getCookie('bio_error')=='1'){
+    if(getcookie('bio_error')=='1'){
       $messages[] = '<div class="error">Заполните биографию.</div>';
     }
     else{
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('lang_error', '', 100000);
     setcookie('lang_value', '', 100000);
 
-    if(getCookie('lang_error')=='1'){
+    if(getcookie('lang_error')=='1'){
       $messages[] = '<div class="error">Укажите любимый(ые) язык(и) программирования.</div>';
     }
     else{
