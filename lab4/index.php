@@ -199,7 +199,7 @@ else {
       }
     }
   }
-  string $langs_value =(implode(",", $array));
+  $langs_value =(implode(",", $array));
   setcookie('lang_value', $langs_value, time() + 365 * 24 * 60 * 60);
 
   if(empty($bdate)) {
