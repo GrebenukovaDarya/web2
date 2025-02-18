@@ -30,7 +30,7 @@
 
       <label> 
         ФИО: <br/>
-        <input name="fio" <?php if ($errors['fio']) {print 'class="error"';} ?> value="<?php print $values['fio']; ?>" />
+        <input name="fio" <?php if ($errors['fio1'] || $errors['fio2'] || $errors['fio3']) {print 'class="error"';} ?> value="<?php print $values['fio']; ?>" />
       </label> <br/>
 
       <label> 
@@ -54,14 +54,14 @@
 
       Пол: <br /> 
       <label> <input type="radio" checked="checked" name="radio-group-1" value="male" 
-      <?php if ($errors['gen']) {print 'class="error"';} ?>/> Мужской </label>
+      <?php if ($errors['gen1'] || $errors['gen2']) {print 'class="error"';} ?>/> Мужской </label>
       <label> <input type="radio"  name="radio-group-1" value="female" 
-      <?php if ($errors['gen']) {print 'class="error"';} ?>/> Женский</label> <br/>
+      <?php if ($errors['gen1'] || $errors['gen2']) {print 'class="error"';} ?>/> Женский</label> <br/>
 
       <label > 
         Любимый язык программирования: <br/>
         <select  name="languages[]" multiple="multiple" 
-        <?php if ($errors['lang']) {print 'class="error"';} ?> >
+        <?php if ($errors['lang1'] || $errors['lang2']) {print 'class="error"';} ?> >
           <option value="Pascal"> Pascal</option>
           <option value="C"> C</option>
           <option value="C++"> C++ </option>
@@ -79,7 +79,7 @@
 
       <label>
         Биография: <br/>
-        <textarea name="biography" <?php if ($errors['bio']) {print 'class="error"';} ?>><?php print $values['bio']; ?></textarea>
+        <textarea name="biography" <?php if ($errors['bio1'] || $errors['bio2']) {print 'class="error"';} ?>><?php print $values['bio']; ?></textarea>
       </label> <br/>
 
       <label class="form-checkbox pl-2">
