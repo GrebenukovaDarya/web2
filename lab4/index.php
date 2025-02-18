@@ -12,8 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   $errors = array();
   $errors['fio1'] = !empty($_COOKIE['fio_error1']);
-  $errors['fio2'] = !empty($_COOKIE['fio_error1']);
-  $errors['fio3'] = !empty($_COOKIE['fio_error1']);
+  $errors['fio2'] = !empty($_COOKIE['fio_error2']);
+  $errors['fio3'] = !empty($_COOKIE['fio_error3']);
   $errors['number'] = !empty($_COOKIE['number_error']);
   $errors['email'] = !empty($_COOKIE['email_error']);
   $errors['bio1'] = !empty($_COOKIE['bio_error1']);
