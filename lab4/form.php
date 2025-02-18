@@ -58,11 +58,15 @@
       <label> <input type="radio"  name="radio-group-1" value="female" 
       <?php if ($errors['gen1'] || $errors['gen2']) {print 'class="error"';} ?>/> Женский</label> <br/>
 
+      <?php 
+      $user_languages = explode(",",  $values['lang']);
+      ?>
+
       <label > 
         Любимый язык программирования: <br/>
         <select  name="languages[]" multiple="multiple" 
         <?php if ($errors['lang1'] || $errors['lang2']) {print 'class="error"';} ?> >
-          <option value="Pascal"> Pascal</option>
+          <option value="Pascal" selected="<?php if(in_array('Pascal', $user_languages)) print='selected'?>"> Pascal</option>
           <option value="C"> C</option>
           <option value="C++"> C++ </option>
           <option value="Python"> Python</option>
