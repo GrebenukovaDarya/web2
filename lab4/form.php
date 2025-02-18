@@ -52,11 +52,13 @@
         <?php if ($errors['bdate']) {print 'class="error"';} ?> value="<?php print $values['bdate']; ?>"/>
       </label> <br/>
 
-      Пол: <br /> 
-      <label> <input type="radio" checked="checked" name="radio-group-1" value="male" 
-      <?php if ($errors['gen1'] || $errors['gen2']) {print 'class="error"';} ?>/> Мужской </label>
+       Пол: <br /> 
+      <label> <input type="radio" name="radio-group-1" value="male" 
+      <?php if ($errors['gen1'] || $errors['gen2']) {print 'class="error"';} ?>
+      <?php if ($values['gen']=='male') {print 'checked="checked"';} ?>/> Мужской </label>
       <label> <input type="radio"  name="radio-group-1" value="female" 
-      <?php if ($errors['gen1'] || $errors['gen2']) {print 'class="error"';} ?>/> Женский</label> <br/>
+      <?php if ($errors['gen1'] || $errors['gen2']) {print 'class="error"';} ?>
+      <?php if ($values['gen']=='female') {print 'checked="checked"';} ?>/> Женский</label> <br/>
 
       <?php 
       $user_languages = explode(",",  $values['lang']);
