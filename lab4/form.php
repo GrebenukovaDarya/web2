@@ -66,7 +66,7 @@
         Любимый язык программирования: <br/>
         <select  name="languages[]" multiple="multiple" 
         <?php if ($errors['lang1'] || $errors['lang2']) {print 'class="error"';} ?> >
-          <option value="Pascal" selected="<?php if(in_array('Pascal', $user_languages)) print 'selected'?>"> Pascal</option>
+          <option value="Pascal" <?php if(in_array('Pascal', $user_languages)) {print 'selected="selected"'}?>> Pascal</option>
           <option value="C"> C</option>
           <option value="C++"> C++ </option>
           <option value="Python"> Python</option>
