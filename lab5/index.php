@@ -267,6 +267,9 @@ else {
 else {
   // Генерируем уникальный логин и пароль.
   // TODO: сделать механизм генерации, например функциями rand(), uniquid(), md5(), substr().
+
+  // uniqid(string $prefix = "", bool $more_entropy = false): string
+  
   $login = '123';
   $pass = '123';
   // Сохраняем в Cookies.
