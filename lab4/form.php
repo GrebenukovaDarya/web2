@@ -51,7 +51,7 @@
         <input name="birthdate" type="date" 
         <?php if ($errors['bdate']) {print 'class="error"';} ?> value="<?php print $values['bdate']; ?>"/>
       </label> <br/>
-
+      
        Пол: <br /> 
       <label> <input type="radio" name="radio-group-1" value="male" 
       <?php if ($errors['gen1'] || $errors['gen2']) {print 'class="error"';} ?>

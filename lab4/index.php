@@ -11,9 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   }
 
   $errors = array();
+  $errors['fio'] = !empty($_COOKIE['fio_error']);
+  /*
   $errors['fio1'] = !empty($_COOKIE['fio_error1']);
   $errors['fio2'] = !empty($_COOKIE['fio_error2']);
   $errors['fio3'] = !empty($_COOKIE['fio_error3']);
+  */
   $errors['number'] = !empty($_COOKIE['number_error']);
   $errors['email'] = !empty($_COOKIE['email_error']);
   $errors['bio1'] = !empty($_COOKIE['bio_error1']);
@@ -25,7 +28,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['bdate'] = !empty($_COOKIE['bdate_error']);
   $errors['checkbox'] = !empty($_COOKIE['checkbox_error']);
 
-
+  if ($errors['fio']) {
+    if($errors['fio']=='1'){
+      $messages[] = '<div class="error">Заполните имя.</div>';
+    }
+    elseif($errors['fio']=='2'){
+      $messages[] = '<div class="error">Введенное имя указано некорректно. Имя не должно превышать 128 символов.</div>';
+    }
+    else{
+      $messages[] = '<div class="error">Введенное имя указано некорректно. Имя должно содержать только буквы и пробелы.</div>';
+    }
+    setcookie('fio_error', '', 100000);
+    setcookie('fio_value', '', 100000);
+   }
+  /*
    if ($errors['fio1']) {
     setcookie('fio_error1', '', 100000);
     setcookie('fio_value', '', 100000);
@@ -41,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('fio_value', '', 100000);
     $messages[] = '<div class="error">Введенное имя указано некорректно. Имя должно содержать только буквы и пробелы.</div>';
    }
+    */
 
   if ($errors['number']) {
     setcookie('number_error', '', 100000);
@@ -132,15 +149,15 @@ else {
 
   if (empty($fio)) {
     //print('Заполните имя.<br/>');
-    setcookie('fio_error1', '1', time() + 24 * 60 * 60);
+    setcookie('fio_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   } elseif (strlen($fio) > 128 ) {
     //print('Введенное имя указано некорректно. Имя не должно превышать 128 символов.<br/>');
-    setcookie('fio_error2', '2', time() + 24 * 60 * 60);
+    setcookie('fio_error', '2', time() + 24 * 60 * 60);
     $errors = TRUE;
   } elseif ( !preg_match('/^[a-zA-Zа-яА-ЯёЁ\s]+$/u', $fio)) {
     //print('Введенное имя указано некорректно. Имя должно содержать только буквы и пробелы.<br/>');
-    setcookie('fio_error3', '3', time() + 24 * 60 * 60);
+    setcookie('fio_error', '3', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
   setcookie('fio_value', $fio, time() + 365 * 24 * 60 * 60);
