@@ -29,10 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors['checkbox'] = !empty($_COOKIE['checkbox_error']);
 
   if ($errors['fio']) {
-    if($errors['fio']=='1'){
+    if($_COOKIE['fio_error']=='1'){
       $messages[] = '<div class="error">Заполните имя.</div>';
     }
-    elseif($errors['fio']=='2'){
+    elseif($_COOKIE['fio_error']=='2'){
       $messages[] = '<div class="error">Введенное имя указано некорректно. Имя не должно превышать 128 символов.</div>';
     }
     else{
