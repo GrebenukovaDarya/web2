@@ -8,7 +8,7 @@
   </head>
   <body>
 
-    <div class="error_messages" <?php if (empty($messages)) {print 'display="none"';} else {print 'display="block"';} ?>>
+    <div class="error_messages" display=<?php if (empty($messages)) {print '"none"';} else {print '"block"';} ?>>
 
       <?php
       if (!empty($messages)) {

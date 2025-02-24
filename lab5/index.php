@@ -175,7 +175,7 @@ else {
   setcookie('number_value', $num, time() + 365 * 24 * 60 * 60);
 
   if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    //print('Введенный email указан некорректно.<br/>');
+    //print('Еmail не указан или указан некорректно.<br/>');
     setcookie('email_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
@@ -203,6 +203,10 @@ else {
   } elseif(strlen($biography) > 512){
     //print('Количество символов в поле "биография" не должно превышать 512.<br/>');
     setcookie('bio_error2', '2', time() + 24 * 60 * 60);
+    $errors = TRUE;
+  } elseif(!preg_match('/^\+7\d{10}$/', $biography)){
+    //print('Поле биография заполнено некорректно.<br/>');
+    setcookie('bio_error2', '3', time() + 24 * 60 * 60);
     $errors = TRUE;
   }
   setcookie('bio_value', $biography, time() + 365 * 24 * 60 * 60);
@@ -273,28 +277,19 @@ else {
         exit();
     }
 
-    $fio = $_POST['fio'];
-  $num = $_POST['number'];
-  $email = $_POST['email'];
-  $bdate = $_POST['birthdate'];
-  $biography = $_POST['biography'];
-  $gen = $_POST['radio-group-1'];
-  //$checkbox= $_POST['checkbox'];
-  $allowed_lang = ["Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Clojure", "Haskel", "Prolog", "Scala", "Go"];
-  $languages = $_POST['languages'] ?? []; 
     //update
     try {
         $stmt_update = $db->prepare("UPDATE application SET fio=?, number=?, email=?, bdate=?, gender=?, biography=?, checkbox=? WHERE id=?");
         $stmt->execute([$_POST['fio'], $_POST['number'], $_POST['email'], $_POST['birthdate'], $_POST['radio-group-1'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0]);
     
         $stmt_select = $db->prepare("SELECT id_lang FROM prog_lang WHERE lang_name = ?");
-        $stmt_insert = $db->prepare("INSERT INTO user_lang (id, id_lang) VALUES (?, ?)");
+        $stmt_lang_update = $db->prepare("UPDATE user_lang SET id_lang=? WHERE id=?");
         foreach ($languages as $language) {
             $stmt_select ->execute([$language]);
             $id_lang = $stmt_select->fetchColumn();
       
             if ($id_lang) {
-                $stmt__update_lang->execute([$id_lang, $id]);
+                $stmt_lang_update->execute([$id_lang, $id]);
             }
         }
     } catch (PDOException $e){
@@ -304,12 +299,14 @@ else {
 
   } 
   else {
-  
-  $login = //md5(string $fio, bool $binary = true);
+  //$permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+  $login = substr(md5(time()), 0, 16); //substr(str_shuffle($permitted_chars), 0, 10);
   $password = //uniqid(string $prefix = "", bool $more_entropy = false);
+  $hash_password
   // Сохраняем в Cookies.
   setcookie('login', $login);
-  setcookie('password', $password);
+  setcookie('password', $hash_password);
    
   /////
   $user = 'u68607';
@@ -350,7 +347,7 @@ else {
 
   try{
     $stmt_insert = $db->prepare("INSERT INTO users (login, password, role, id ) values (?, ?, ?, ?)");
-    $stmt_insert->execute([ $login, $password, "user", $id]);
+    $stmt_insert->execute([ $login, $hash_password, "user", $id]);
   } 
   catch (PDOException $e){
     print('Error : ' . $e->getMessage());
@@ -361,5 +358,7 @@ else {
   setcookie('save', '1');
  ///
 
-  header('Location: index.php');
+  //header('Location: index.php');
+  header('Location: ./');
+
 }
