@@ -30,7 +30,7 @@
 
       <label> 
         ФИО: <br/>
-        <input name="fio" <?php if ($errors['fio1'] || $errors['fio2'] || $errors['fio3']) {print 'class="error"';} ?> value="<?php print $values['fio']; ?>" />
+        <input name="fio" <?php if ($errors['fio'] ) {print 'class="error"';} ?> value="<?php print $values['fio']; ?>" />
       </label> <br/>
 
       <label> 
