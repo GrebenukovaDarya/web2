@@ -257,28 +257,61 @@ else {
     setcookie('bdate_error', '', 100000);
   }
 
-  /*
-    // Проверяем меняются ли ранее сохраненные данные или отправляются новые.
-    if (!empty($_COOKIE[session_name()]) &&
-    session_start() && !empty($_SESSION['login'])) {
-  // TODO: перезаписать данные в БД новыми данными,
-  // кроме логина и пароля.
-}
-else {
-  // Генерируем уникальный логин и пароль.
-  // TODO: сделать механизм генерации, например функциями rand(), uniquid(), md5(), substr().
 
-  // uniqid(string $prefix = "", bool $more_entropy = false): string
+    // Проверяем меняются ли ранее сохраненные данные или отправляются новые.
+  if (!empty($_COOKIE[session_name()]) &&
+    session_start() && !empty($_SESSION['login'])) {
+    
+    //select 
+    $user_id;
+    try {
+        $stmt_select = $db->prepare("SELECT id FROM users WHERE login=?");
+        $stmt_select->execute([$login]);
+        $user_id = $stmt_select->fetchColumn();
+    } catch (PDOException $e){
+        print('Error : ' . $e->getMessage());
+        exit();
+    }
+
+    $fio = $_POST['fio'];
+  $num = $_POST['number'];
+  $email = $_POST['email'];
+  $bdate = $_POST['birthdate'];
+  $biography = $_POST['biography'];
+  $gen = $_POST['radio-group-1'];
+  //$checkbox= $_POST['checkbox'];
+  $allowed_lang = ["Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Clojure", "Haskel", "Prolog", "Scala", "Go"];
+  $languages = $_POST['languages'] ?? []; 
+    //update
+    try {
+        $stmt_update = $db->prepare("UPDATE application SET fio=?, number=?, email=?, bdate=?, gender=?, biography=?, checkbox=? WHERE id=?");
+        $stmt->execute([$_POST['fio'], $_POST['number'], $_POST['email'], $_POST['birthdate'], $_POST['radio-group-1'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0]);
+    
+        $stmt_select = $db->prepare("SELECT id_lang FROM prog_lang WHERE lang_name = ?");
+        $stmt_insert = $db->prepare("INSERT INTO user_lang (id, id_lang) VALUES (?, ?)");
+        foreach ($languages as $language) {
+            $stmt_select ->execute([$language]);
+            $id_lang = $stmt_select->fetchColumn();
+      
+            if ($id_lang) {
+                $stmt__update_lang->execute([$id_lang, $id]);
+            }
+        }
+    } catch (PDOException $e){
+        print('Error : ' . $e->getMessage());
+        exit();
+    }
+
+  } 
+  else {
   
-  $login = '123';
-  $pass = '123';
+  $login = //md5(string $fio, bool $binary = true);
+  $password = //uniqid(string $prefix = "", bool $more_entropy = false);
   // Сохраняем в Cookies.
   setcookie('login', $login);
-  setcookie('pass', $pass);
-  */
-
-  
-/////
+  setcookie('password', $password);
+   
+  /////
   $user = 'u68607';
   $pass = '7232008';
   $db = new PDO('mysql:host=localhost;dbname=u68607', $user, $pass,
@@ -288,7 +321,6 @@ else {
   $table_ul='user_lang';
 
   try{
-    //$data = array( 'fio' => $fio, 'num' => $num, 'email' => $email, 'bdate' => $bdate, 'gen' => $gen, 'biography' => $biography, 'checkbox' => $_POST["checkbox"]); 
     $stmt = $db->prepare("INSERT INTO application (fio, number, email, bdate, gender, biography, checkbox ) values (?, ?, ?, ?, ?, ?, ? )");
     $stmt->execute([$_POST['fio'], $_POST['number'], $_POST['email'], $_POST['birthdate'], $_POST['radio-group-1'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0]);
   } 
@@ -316,9 +348,18 @@ else {
     exit();
   }
 
-////
+  try{
+    $stmt_insert = $db->prepare("INSERT INTO users (login, password, role, id ) values (?, ?, ?, ?)");
+    $stmt_insert->execute([ $login, $password, "user", $id]);
+  } 
+  catch (PDOException $e){
+    print('Error : ' . $e->getMessage());
+    exit();
+  }
+ }
+ ////
   setcookie('save', '1');
-////
+ ///
 
   header('Location: index.php');
 }
