@@ -54,10 +54,10 @@
       
        Пол: <br /> 
       <label> <input type="radio" name="radio-group-1" value="male" 
-      <?php if ($errors['gen1'] || $errors['gen2']) {print 'class="error"';} ?>
+      <?php if ($errors['gen']) {print 'class="error"';} ?>
       <?php if ($values['gen']=='male') {print 'checked="checked"';} ?>/> Мужской </label>
       <label> <input type="radio"  name="radio-group-1" value="female" 
-      <?php if ($errors['gen1'] || $errors['gen2']) {print 'class="error"';} ?>
+      <?php if ($errors['gen']) {print 'class="error"';} ?>
       <?php if ($values['gen']=='female') {print 'checked="checked"';} ?>/> Женский</label> <br/>
 
       <?php 
@@ -67,7 +67,7 @@
       <label > 
         Любимый язык программирования: <br/>
         <select  name="languages[]" multiple="multiple" 
-        <?php if ($errors['lang1'] || $errors['lang2']) {print 'class="error"';} ?> >
+        <?php if ($errors['lang']) {print 'class="error"';} ?> >
           <option value="Pascal" <?php if(in_array('Pascal', $user_languages)) {print 'selected="selected"';}?>> Pascal</option>
           <option value="C" <?php if(in_array('C', $user_languages)) {print 'selected="selected"';}?>> C</option>
           <option value="C++" <?php if(in_array('C++', $user_languages)) {print 'selected="selected"';}?>> C++ </option>
@@ -85,7 +85,7 @@
 
       <label>
         Биография: <br/>
-        <textarea name="biography" <?php if ($errors['bio1'] || $errors['bio2']) {print 'class="error"';} ?>><?php print $values['bio']; ?></textarea>
+        <textarea name="biography" <?php if ($errors['bio']) {print 'class="error"';} ?>><?php print $values['bio']; ?></textarea>
       </label> <br/>
 
       <label class="form-checkbox pl-2">

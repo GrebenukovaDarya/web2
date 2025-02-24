@@ -24,9 +24,8 @@ $languages = $_POST['languages'] ?? [];
 
 $errors = FALSE;
 
-
 if (empty($fio)) {
-  print('Заполните имя.<br/>');
+  print('Имя не указано.<br/>');
   $errors = TRUE;
 } elseif (strlen($fio) > 128 ) {
   print('Введенное имя указано некорректно. Имя не должно превышать 128 символов.<br/>');
@@ -36,25 +35,31 @@ if (empty($fio)) {
   $errors = TRUE;
 }
 
-if (empty($num) || !preg_match('/^\+7\d{10}$/', $num)) {
-  print('Номер не указан, либо указан некорректно.<br/>');
+
+if (empty($num)) {
+  print('Номер не указан.<br/>');
+  $errors = TRUE;
+} elseif (!preg_match('/^\+7\d{10}$/', $num)) {
+  print('Номер указан некорректно.<br/>');
   $errors = TRUE;
 }
 
-if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+if (empty($email) ) {
+  print('Email не указан.<br/>');
+  $errors = TRUE;
+} elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
   print('Введенный email указан некорректно.<br/>');
   $errors = TRUE;
 }
 
-
 if (empty($gen)){
-  print ('Укажите пол.<br/>');
+  print ('Пол не указан.<br/>');
   $errors = TRUE;
 }
 else{
   $allowed_genders = ["male", "female"];
   if (!in_array($gen, $allowed_genders)) {
-    print('Указан недопустимый пол.<br/>');
+    print('Поле "пол" содержит недопустимое значение.<br/>');
     $errors = TRUE;
   }
 }
@@ -65,7 +70,11 @@ if (empty($biography)) {
 } elseif(strlen($biography) > 512){
   print('Количество символов в поле "биография" не должно превышать 512.<br/>');
   $errors = TRUE;
-}
+} /*elseif(!preg_match('/^[a-zA-Zа-яА-ЯёЁ0-9\s]+$/u', $biography)){
+  //print('Поле "биография" содержит недопустимые символы.<br/>');
+  setcookie('bio_error', '3', time() + 24 * 60 * 60);
+  $errors = TRUE;
+}*/
 
 if(empty($languages)) {
   print('Укажите любимый(ые) язык(и) программирования.<br/>');
@@ -80,7 +89,7 @@ if(empty($languages)) {
 }
 
 if(empty($bdate)) {
-  print('Введите дату рождения.<br/>');
+  print('Дата рождения не указана.<br/>');
   $errors = TRUE;
 }
 
@@ -88,6 +97,7 @@ if (!isset($_POST["checkbox"])) {
   print('Подтвердите, что вы ознакомлены с контрактом.<br/>');
   $errors = TRUE;
 }
+  
 
 if ($errors) {
   exit();
