@@ -1,12 +1,76 @@
-<form action="" method="POST">
-  <input name="fio" />
-  <select name="year">
-    <?php 
-    for ($i = 1922; $i <= 2022; $i++) {
-      printf('<option value="%d">%d год</option>', $i, $i);
-    }
-    ?>
-  </select>
+<!DOCTYPE html>
+<html lang="ru">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="style.css">
+    <title> LAB3 </title>
+  </head>
+
+  <body>
+    
+    <div class="formstyle" > 
+    <form id="myform" class="formcarryForm" action="index.php" method="POST">
+
+      <h2> ФОРМА </h2> 
+
+    <label> 
+      ФИО: <br/>
+      <input name="fio" />
+    </label> <br/>
+
+    <label> 
+      Номер телефона: <br />
+      <input name="number" type="tel" />
+    </label> <br/>
+    <p class="numtext"> *используйте телефонный код +7</p>
+
+    <label>
+      E-mail: <br/>
+      <input name="email" type="email" />
+    </label> <br/>
+
+    <label> 
+      Дата рождения: <br/>
+      <input name="birthdate" type="date" />
+    </label> <br/>
+
+    Пол: <br /> 
+    <label> <input type="radio" checked="checked" name="radio-group-1" value="male" /> Мужской </label>
+    <label> <input type="radio"  name="radio-group-1" value="female" /> Женский</label> <br/>
+
+    <label > 
+      Любимый язык программирования: <br/>
+      <select  name="languages[]" multiple="multiple">
+        <option value="Pascal"> Pascal</option>
+        <option value="C"> C</option>
+        <option value="C++"> C++ </option>
+        <option value="Python"> Python</option>
+        <option value="Java"> Java</option>
+        <option value="JavaScript"> JavaScript</option>
+        <option value="PHP"> PHP</option>
+        <option value="Clojure"> Clojure</option>
+        <option value="Haskel"> Haskel</option>
+        <option value="Prolog"> Prolog</option>
+        <option value="Scala"> Scala</option>
+        <option value="Go"> Go</option>
+      </select>
+    </label> <br/>
+
+    <label>
+      Биография: <br/>
+      <textarea name="biography"> </textarea>
+    </label> <br/>
+
+    <label class="form-checkbox pl-2"> <input type="checkbox" name="checkbox" class="custom-checkbox"/> 
+      С контрактом ознакомлен 
+    </label> <br/>
+
+    <input type="submit" value="Сохранить"/> 
+    </form>
+</div>
+
   
-  <input type="submit" value="ok" />
-</form>
+  </body>
+</html>

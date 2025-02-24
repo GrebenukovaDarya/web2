@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     print('Спасибо, результаты сохранены.');
   }
 
-  //include('form.php');
+  include('form.php');
   exit();
 }
 
