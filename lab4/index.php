@@ -73,10 +73,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
     elseif($_COOKIE['bio_error']=='2'){
       $messages[] = '<div class="error">Количество символов в поле "биография" не должно превышать 512.</div>';
-    }/*
+    }
     elseif($_COOKIE['bio_error']=='3'){
       $messages[] = '<div class="error">Поле "биография" содержит недопустимые символы.</div>';
-    }*/
+    }
     setcookie('bio_error', '', 100000);
     setcookie('bio_value', '', 100000);
   }
@@ -196,11 +196,11 @@ else {
     //print('Количество символов в поле "биография" не должно превышать 512.<br/>');
     setcookie('bio_error', '2', time() + 24 * 60 * 60);
     $errors = TRUE;
-  } /*elseif(!preg_match('/^[a-zA-Zа-яА-ЯёЁ0-9\s]+$/u', $biography)){
+  } elseif(!preg_match('/^[а-яА-Яa-zA-Z1-9.,: ]+$/u', $biography)){
     //print('Поле "биография" содержит недопустимые символы.<br/>');
     setcookie('bio_error', '3', time() + 24 * 60 * 60);
     $errors = TRUE;
-  }*/
+  }
   setcookie('bio_value', $biography, time() + 365 * 24 * 60 * 60);
 
   if(empty($languages)) {

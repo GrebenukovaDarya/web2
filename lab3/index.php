@@ -70,11 +70,10 @@ if (empty($biography)) {
 } elseif(strlen($biography) > 512){
   print('Количество символов в поле "биография" не должно превышать 512.<br/>');
   $errors = TRUE;
-} /*elseif(!preg_match('/^[a-zA-Zа-яА-ЯёЁ0-9\s]+$/u', $biography)){
-  //print('Поле "биография" содержит недопустимые символы.<br/>');
-  setcookie('bio_error', '3', time() + 24 * 60 * 60);
+} elseif(!preg_match('/^[а-яА-Яa-zA-Z1-9.,: ]+$/u', $biography)){
+  print('Поле "биография" содержит недопустимые символы.<br/>');
   $errors = TRUE;
-}*/
+}
 
 if(empty($languages)) {
   print('Укажите любимый(ые) язык(и) программирования.<br/>');
