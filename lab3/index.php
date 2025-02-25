@@ -26,11 +26,10 @@ $gen = $_POST['radio-group-1'];
 //$allowed_lang = ["Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Clojure", "Haskel", "Prolog", "Scala", "Go"];
   $allowed_lang = [];
   try{
-    $data = $db->query("SELECT id_lang, lang_name FROM prog_lang")->fetchAll();
+    $data = $db->query("SELECT lang_name FROM prog_lang")->fetchAll();
     foreach ($data as $lang) {
       $lang_name = $lang['lang_name'];
-      $id_lang= $lang['id_lang'];
-      $allowed_lang[$id_lang] = $lang_name;
+      $allowed_lang[$lang_name] = $lang_name;
     }
   } catch(PDOException $e){
     print('Error: ' . $e->getMessage());
