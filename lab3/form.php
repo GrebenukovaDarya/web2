@@ -44,7 +44,7 @@
       Любимый язык программирования: <br/>
       <select  name="languages[]" multiple="multiple">
       <?php 
-        foreach ($allowed_lang as $lang => $value) {
+        foreach ($languages as $lang => $value) {
           printf('<option value="%s">%s</option>', $lang, $value);
         }
       ?>
