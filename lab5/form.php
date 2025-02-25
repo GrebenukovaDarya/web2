@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet"  href="style.css">
-    <title> LAB4 </title>
+    <title> LAB5 </title>
   </head>
   <body>
 
@@ -68,18 +68,17 @@
         Любимый язык программирования: <br/>
         <select  name="languages[]" multiple="multiple" 
         <?php if ($errors['lang']) {print 'class="error"';} ?> >
-          <option value="Pascal" <?php if(in_array('Pascal', $user_languages)) {print 'selected="selected"';}?>> Pascal</option>
-          <option value="C" <?php if(in_array('C', $user_languages)) {print 'selected="selected"';}?>> C</option>
-          <option value="C++" <?php if(in_array('C++', $user_languages)) {print 'selected="selected"';}?>> C++ </option>
-          <option value="Python" <?php if(in_array('Python', $user_languages)) {print 'selected="selected"';}?>> Python</option>
-          <option value="Java" <?php if(in_array('Java', $user_languages)) {print 'selected="selected"';}?>> Java</option>
-          <option value="JavaScript" <?php if(in_array('JavaScript', $user_languages)) {print 'selected="selected"';}?>> JavaScript</option>
-          <option value="PHP" <?php if(in_array('PHP', $user_languages)) {print 'selected="selected"';}?>> PHP</option>
-          <option value="Clojure" <?php if(in_array('Clojure', $user_languages)) {print 'selected="selected"';}?>> Clojure</option>
-          <option value="Haskel" <?php if(in_array('Haskel', $user_languages)) {print 'selected="selected"';}?>> Haskel</option>
-          <option value="Prolog" <?php if(in_array('Prolog', $user_languages)) {print 'selected="selected"';}?>> Prolog</option>
-          <option value="Scala" <?php if(in_array('Scala', $user_languages)) {print 'selected="selected"';}?>> Scala</option>
-          <option value="Go" <?php if(in_array('Go', $user_languages)) {print 'selected="selected"';}?>> Go</option>
+
+        <?php 
+          foreach ($allowed_lang as $lang => $value) {
+            printf('<option value="%s" ', $lang);
+            if(in_array($lang, $user_languages)) {
+              print 'selected="selected"';
+            }
+            printf('>%s</option>', $value);
+          }
+        ?>
+        
         </select>
       </label> <br/>
 
