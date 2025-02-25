@@ -43,6 +43,12 @@
     <label > 
       Любимый язык программирования: <br/>
       <select  name="languages[]" multiple="multiple">
+      <?php 
+        foreach ($allowed_lang as $lang => $value) {
+          printf('<option value="%s">%s</option>', $value, $value);
+        }
+      ?>
+    <!--
         <option value="Pascal"> Pascal</option>
         <option value="C"> C</option>
         <option value="C++"> C++ </option>
@@ -54,7 +60,7 @@
         <option value="Haskel"> Haskel</option>
         <option value="Prolog"> Prolog</option>
         <option value="Scala"> Scala</option>
-        <option value="Go"> Go</option>
+        <option value="Go"> Go</option> -->
       </select>
     </label> <br/>
 

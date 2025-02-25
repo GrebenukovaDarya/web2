@@ -11,6 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   exit();
 }
 
+$user = 'u68607';
+$pass = '7232008';
+$db = new PDO('mysql:host=localhost;dbname=u68607', $user, $pass,
+  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
 $fio = $_POST['fio'];
 $num = $_POST['number'];
@@ -19,7 +23,19 @@ $bdate = $_POST['birthdate'];
 $biography = $_POST['biography'];
 $gen = $_POST['radio-group-1'];
 //$checkbox= $_POST['checkbox'];
-$allowed_lang = ["Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Clojure", "Haskel", "Prolog", "Scala", "Go"];
+//$allowed_lang = ["Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Clojure", "Haskel", "Prolog", "Scala", "Go"];
+  $allowed_lang = [];
+  try{
+    $data = $db->query("SELECT id_lang, lang_name FROM prog_lang")->fetchAll();
+    foreach ($data as $lang) {
+      $lang_name = $lang['lang_name'];
+      $id_lang= $lang['id_lang'];
+      $allowed_lang[$id_lang] = $lang_name;
+    }
+  } catch(PDOException $e){
+    print('Error: ' . $e->getMessage());
+    exit();
+  }
 $languages = $_POST['languages'] ?? []; 
 
 $errors = FALSE;
@@ -103,10 +119,6 @@ if ($errors) {
 }
 //
 
-$user = 'u68607';
-$pass = '7232008';
-$db = new PDO('mysql:host=localhost;dbname=u68607', $user, $pass,
-  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 $table_app = 'application';
 $table_lang = 'prog_lang';
 $table_ul='user_lang';
