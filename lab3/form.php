@@ -45,7 +45,7 @@
       <select  name="languages[]" multiple="multiple">
       <?php 
         foreach ($allowed_lang as $lang => $value) {
-          printf('<option value="%s">%s</option>', $key, $value);
+          printf('<option value="%s">%s</option>', $lang, $value);
         }
       ?>
     <!--
