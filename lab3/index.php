@@ -25,17 +25,23 @@ $gen = $_POST['radio-group-1'];
 //$checkbox= $_POST['checkbox'];
 //$allowed_lang = ["Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Clojure", "Haskel", "Prolog", "Scala", "Go"];
   $allowed_lang = [];
-  try{
-    $data = $db->query("SELECT lang_name FROM prog_lang")->fetchAll();
-    foreach ($data as $lang) {
-      $lang_name = $lang['lang_name'];
-      $allowed_lang[$lang_name] = $lang_name;
+
+  function getLangs($db){
+    try{
+      $allowed_lang=[];
+      $data = $db->query("SELECT lang_name FROM prog_lang")->fetchAll();
+      foreach ($data as $lang) {
+        $lang_name = $lang['lang_name'];
+        $allowed_lang[$lang_name] = $lang_name;
+      }
+      return $allowed_lang;
+    } catch(PDOException $e){
+      print('Error: ' . $e->getMessage());
+      exit();
     }
-  } catch(PDOException $e){
-    print('Error: ' . $e->getMessage());
-    exit();
   }
-$languages = $_POST['languages'] ?? []; 
+  $allowed_lang=getLangs($db);
+  $languages = $_POST['languages'] ?? []; 
 
 $errors = FALSE;
 
