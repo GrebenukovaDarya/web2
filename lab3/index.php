@@ -1,6 +1,28 @@
 <?php
 
 header('Content-Type: text/html; charset=UTF-8');
+
+
+$user = 'u68607';
+$pass = '7232008';
+$db = new PDO('mysql:host=localhost;dbname=u68607', $user, $pass,
+  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+function getLangs($db){
+  try{
+    $allowed_lang=[];
+    $data = $db->query("SELECT lang_name FROM prog_lang")->fetchAll();
+    foreach ($data as $lang) {
+      $lang_name = $lang['lang_name'];
+      $allowed_lang[$lang_name] = $lang_name;
+    }
+    return $allowed_lang;
+  } catch(PDOException $e){
+    print('Error: ' . $e->getMessage());
+    exit();
+  }
+}
+$allowed_lang=getLangs($db);
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   if (!empty($_GET['save'])) {
@@ -11,10 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   exit();
 }
 
-$user = 'u68607';
-$pass = '7232008';
-$db = new PDO('mysql:host=localhost;dbname=u68607', $user, $pass,
-  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
 $fio = $_POST['fio'];
 $num = $_POST['number'];
@@ -24,23 +42,8 @@ $biography = $_POST['biography'];
 $gen = $_POST['radio-group-1'];
 //$checkbox= $_POST['checkbox'];
 //$allowed_lang = ["Pascal", "C", "C++", "JavaScript", "PHP", "Python", "Java", "Clojure", "Haskel", "Prolog", "Scala", "Go"];
-  $allowed_lang = [];
 
-  function getLangs($db){
-    try{
-      $allowed_lang=[];
-      $data = $db->query("SELECT lang_name FROM prog_lang")->fetchAll();
-      foreach ($data as $lang) {
-        $lang_name = $lang['lang_name'];
-        $allowed_lang[$lang_name] = $lang_name;
-      }
-      return $allowed_lang;
-    } catch(PDOException $e){
-      print('Error: ' . $e->getMessage());
-      exit();
-    }
-  }
-  $allowed_lang=getLangs($db);
+  
   $languages = $_POST['languages'] ?? []; 
 
 $errors = FALSE;
