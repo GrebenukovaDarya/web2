@@ -6,6 +6,7 @@ $user = 'u68607';
 $pass = '7232008';
 $db = new PDO('mysql:host=localhost;dbname=u68607', $user, $pass,
   [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+
 function getLangs($db){
   try{
     $allowed_lang=[];
@@ -23,6 +24,21 @@ function getLangs($db){
 $allowed_lang=getLangs($db);
 
 
+function isValid($login, $db) {
+  $count;
+  try{
+    $stmt = $db->prepare("SELECT COUNT(*) FROM users WHERE login = ?");
+    $stmt->execute([$login]);
+    $count = $stmt->fetchColumn();
+  } 
+  catch (PDOException $e){
+    print('Error : ' . $e->getMessage());
+    exit();
+  }
+  return $count > 0;
+}
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   $messages = array();
@@ -33,11 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('pass', '', 100000);
     $messages[] = 'Спасибо, результаты сохранены.';
 
-    if (!empty($_COOKIE['pass'])) {
+    if (!empty($_COOKIE['password'])) {
         $messages[] = sprintf('Вы можете <a href="login.php">войти</a> с логином <strong>%s</strong>
           и паролем <strong>%s</strong> для изменения данных.',
           strip_tags($_COOKIE['login']),
-          strip_tags($_COOKIE['pass']));
+          strip_tags($_COOKIE['password']));
       }
   }
 
@@ -104,10 +120,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
     elseif($_COOKIE['bio_error']=='2'){
       $messages[] = '<div class="error">Количество символов в поле "биография" не должно превышать 512.</div>';
-    }/*
+    }
     elseif($_COOKIE['bio_error']=='3'){
       $messages[] = '<div class="error">Поле "биография" содержит недопустимые символы.</div>';
-    }*/
+    }
     setcookie('bio_error', '', 100000);
     setcookie('bio_value', '', 100000);
   }
@@ -300,7 +316,7 @@ else {
     $user_id;
     try {
         $stmt_select = $db->prepare("SELECT id FROM users WHERE login=?");
-        $stmt_select->execute([$login]);
+        $stmt_select->execute([$_SESSION['login']]);
         $user_id = $stmt_select->fetchColumn();
     } catch (PDOException $e){
         print('Error : ' . $e->getMessage());
@@ -329,23 +345,18 @@ else {
 
   } 
   else {
-  //$permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
   $login = substr(md5(time()), 0, 16); //substr(str_shuffle($permitted_chars), 0, 10);
-  $password = //uniqid(string $prefix = "", bool $more_entropy = false);
-  $hash_password
+  while(isValid($login)){
+    $login = substr(md5(time()), 0, 16);
+  }
+  $password = substr(str_shuffle($permitted_chars), 0, 12); //uniqid(string $prefix = "", bool $more_entropy = false);
+  $hash_password = md5(time());
   // Сохраняем в Cookies.
   setcookie('login', $login);
   setcookie('password', $hash_password);
    
-  /////
-  //$user = 'u68607';
-  //$pass = '7232008';
-  // $db = new PDO('mysql:host=localhost;dbname=u68607', $user, $pass,
-  //  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-  $table_app = 'application';
-  $table_lang = 'prog_lang';
-  $table_ul='user_lang';
 
   try{
     $stmt = $db->prepare("INSERT INTO application (fio, number, email, bdate, gender, biography, checkbox ) values (?, ?, ?, ?, ?, ?, ? )");
@@ -376,7 +387,7 @@ else {
   }
 
   try{
-    $stmt_insert = $db->prepare("INSERT INTO users (login, password, role, id ) values (?, ?, ?, ?)");
+    $stmt_insert = $db->prepare("INSERT INTO users (login, password, role, id ) VALUES (?, ?, ?, ?)");
     $stmt_insert->execute([ $login, $hash_password, "user", $id]);
   } 
   catch (PDOException $e){
