@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   if (!empty($_COOKIE['save'])) {
     setcookie('save', '', 100000);
     setcookie('login', '', 100000);
-    setcookie('pass', '', 100000);
+    setcookie('password', '', 100000);
     $messages[] = 'Спасибо, результаты сохранены.';
 
     if (!empty($_COOKIE['password'])) {
@@ -170,7 +170,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // и заполнить переменную $values,
     // предварительно санитизовав.
     // Для загрузки данных из БД делаем запрос SELECT и вызываем метод PDO fetchArray(), fetchObject() или fetchAll() 
-    // См. https://www.php.net/manual/en/pdostatement.fetchall.php
+
+    try{
+      $stmt = $db->prepare("SELECT fio, number, email, biography AS bio, gender AS gen, bdate, checkbox FROM application WHERE login = ?");
+      $stmt->execute([$_SESSION['login']]);
+      $values = $stmt->fetchArray();
+    } 
+    catch (PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
+
     printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
   }
 
@@ -254,11 +264,11 @@ else {
     //print('Количество символов в поле "биография" не должно превышать 512.<br/>');
     setcookie('bio_error', '2', time() + 24 * 60 * 60);
     $errors = TRUE;
-  } /*elseif(!preg_match('/^[a-zA-Zа-яА-ЯёЁ0-9\s]+$/u', $biography)){
+  } elseif(preg_match('/[<>{}\[\]]|<script|<\?php/i', $biography)){
     //print('Поле "биография" содержит недопустимые символы.<br/>');
     setcookie('bio_error', '3', time() + 24 * 60 * 60);
     $errors = TRUE;
-  }*/
+  }
   setcookie('bio_value', $biography, time() + 365 * 24 * 60 * 60);
 
   if(empty($languages)) {
@@ -352,10 +362,10 @@ else {
     $login = substr(md5(time()), 0, 16);
   }
   $password = substr(str_shuffle($permitted_chars), 0, 12); //uniqid(string $prefix = "", bool $more_entropy = false);
-  $hash_password = md5(time());
+  $hash_password = md5($password);
   // Сохраняем в Cookies.
   setcookie('login', $login);
-  setcookie('password', $hash_password);
+  setcookie('password', $password);
    
 
   try{

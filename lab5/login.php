@@ -11,6 +11,35 @@
 // файл login.php должен быть в кодировке UTF-8 без BOM.
 header('Content-Type: text/html; charset=UTF-8');
 
+
+function isValid($login, $db) {
+  $count;
+  try{
+    $stmt = $db->prepare("SELECT COUNT(*) FROM users WHERE login = ?");
+    $stmt->execute([$login]);
+    $count = $stmt->fetchColumn();
+  } 
+  catch (PDOException $e){
+    print('Error : ' . $e->getMessage());
+    exit();
+  }
+  return $count > 0;
+}
+
+function password_check($login, $password, $db) {
+  $passw;
+  try{
+    $stmt = $db->prepare("SELECT password FROM users WHERE login = ?");
+    $stmt->execute([$login]);
+    $passw = $stmt->fetchColumn();
+  } 
+  catch (PDOException $e){
+    print('Error : ' . $e->getMessage());
+    exit();
+  }
+  return ($passw==$password);
+}
+
 // В суперглобальном массиве $_SESSION хранятся переменные сессии.
 // Будем сохранять туда логин после успешной авторизации.
 $session_started = false;
@@ -34,26 +63,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 <form action="" method="post">
   <input name="login" />
-  <input name="pass" />
+  <input name="password" />
   <input type="submit" value="Войти" />
 </form>
 
 <?php
 }
   $login = $_POST['login'];
-  $pass = $_POST['pass'];
+  $password = $_POST['password'];
+
 // Иначе, если запрос был методом POST, т.е. нужно сделать авторизацию с записью логина в сессию.
 else {
-  // TODO: Проверть есть ли такой логин и пароль в базе данных.
-  // Выдать сообщение об ошибках.
+
   $user = 'u68607';
   $pass = '7232008';
   $db = new PDO('mysql:host=localhost;dbname=u68607', $user, $pass,
     [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-  $table_app = 'application';
-  $table_lang = 'prog_lang';
-  $table_ul='user_lang';
 
+  // TODO: Проверть есть ли такой логин и пароль в базе данных.
+  // Выдать сообщение об ошибках.
+  
+/*
   try{
     $stmt = $db->prepare("SELECT login FROM application WHERE login=?");
     $stmt->execute([]);
@@ -61,16 +91,21 @@ else {
   catch (PDOException $e){
     print('Error : ' . $e->getMessage());
     exit();
-  }
+  }*/
 
   if (!$session_started) {
     session_start();
   }
   // Если все ок, то авторизуем пользователя.
+  if (isValid($login, $db) || password_check($login, $password, $db)){
   $_SESSION['login'] = $_POST['login'];
   // Записываем ID пользователя.
 
   $_SESSION['uid'] = 123;//uniqid(string $prefix = "", bool $more_entropy = false);
+  }
+  else { 
+    print('Неверный логин или пароль'); 
+  }
 
   // Делаем перенаправление.
   header('Location: ./');

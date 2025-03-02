@@ -217,7 +217,7 @@ else {
     //print('Количество символов в поле "биография" не должно превышать 512.<br/>');
     setcookie('bio_error', '2', time() + 24 * 60 * 60);
     $errors = TRUE;
-  } elseif(!preg_match('/^[а-яА-Яa-zA-Z1-9.,: ]+$/u', $biography)){
+  } elseif(preg_match('/[<>{}\[\]]|<script|<\?php/i', $biography)){
     //print('Поле "биография" содержит недопустимые символы.<br/>');
     setcookie('bio_error', '3', time() + 24 * 60 * 60);
     $errors = TRUE;

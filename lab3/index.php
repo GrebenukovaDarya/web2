@@ -94,7 +94,7 @@ if (empty($biography)) {
 } elseif(strlen($biography) > 512){
   print('Количество символов в поле "биография" не должно превышать 512.<br/>');
   $errors = TRUE;
-} elseif(!preg_match('/^[а-яА-Яa-zA-Z1-9.,: ]+$/u', $biography)){
+} elseif(preg_match('/[<>{}\[\]]|<script|<\?php/i', $biography)){
   print('Поле "биография" содержит недопустимые символы.<br/>');
   $errors = TRUE;
 }
