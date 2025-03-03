@@ -5,7 +5,9 @@ html{
 
 #messages{
     border: 2px solid rgb(67, 53, 120);
-    
+    font-family: "Mac";
+    letter-spacing: 1px;
+    color: #272931;
 }
 
 .error_messages{

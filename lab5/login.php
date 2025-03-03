@@ -60,12 +60,24 @@ if (isset($_COOKIE[session_name()]) && session_start()) {
 // и другие сведения о клиненте и сервере, например метод текущего запроса $_SERVER['REQUEST_METHOD'].
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 ?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="style.css">
+    <title> LAB5 </title>
+  </head>
+  <body>
 
-<form action="" method="post">
-  <input name="login" />
-  <input name="password" />
-  <input type="submit" value="Войти" />
-</form>
+    <form action="" method="post">
+      <input name="login" />
+      <input name="password" />
+      <input type="submit" value="Войти" />
+    </form>
+
+  </body>
+</html>
 
 <?php
 }
