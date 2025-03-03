@@ -40,6 +40,13 @@ function password_check($login, $password, $db) {
   return ($passw==$password);
 }
 
+if(isset($_POST['logout'])){
+  session_unset();
+  session_destroy();
+  header('Location: login.php');
+  exit();
+}
+
 // В суперглобальном массиве $_SESSION хранятся переменные сессии.
 // Будем сохранять туда логин после успешной авторизации.
 
@@ -92,13 +99,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 // Иначе, если запрос был методом POST, т.е. нужно сделать авторизацию с записью логина в сессию.
 else {
-
-  if(isset($_POST['logout'])){
-    session_unset();
-    session_destroy();
-    header('Location: login.php');
-    exit();
-  }
 
   $login = $_POST['login'];
   $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
