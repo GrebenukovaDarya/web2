@@ -16,6 +16,18 @@ html{
     margin-left: auto;
     margin-right: auto;
     align-content: center;
+    border-style: double;
+    border-radius: 15px;
+    border-width: 5px;
+    border-color: #be8b5b;
+    background-color: #eccaa6;
+}
+
+.login_messages{
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
     border-style: dotted;
     border-radius: 15px;
     border-width: 5px;

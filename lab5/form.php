@@ -18,6 +18,7 @@
     
     ?>
 
+
     <div class="error_messages" <?php if (empty($messages)) {print 'display="none"';} else {print 'display="block"';} ?>>
 
       <?php

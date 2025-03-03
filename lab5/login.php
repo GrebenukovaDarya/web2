@@ -84,6 +84,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   </head>
   <body>
 
+  <?php
+      if (!empty($login_check)) {
+        print('<div id="login_messages"> Неверный логин или пароль </div>');
+      }
+      ?>
+
     <form class="login_form" action="" method="post">
       <label> 
         Логин <br/>
@@ -137,7 +143,8 @@ else {
       header('Location: ./');
   }
   else { 
-    print('Неверный логин или пароль'); 
+
+    header('Location: login.php');
   }
 
 
