@@ -177,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       }
     } 
     catch (PDOException $e){
-      print('Error : ' . $e->getMessage());
+      print('ERROR : ' . $e->getMessage());
       exit();
     }
 

@@ -44,13 +44,6 @@ function password_check($login, $password, $db) {
 // Будем сохранять туда логин после успешной авторизации.
 
 
-if(isset($_POST['logout'])){
-  session_unset();
-  session_destroy();
-  header('Location: login.php');
-  exit();
-}
-
 $session_started = false;
 
 if (isset($_COOKIE[session_name()]) && session_start()) {
@@ -68,6 +61,15 @@ if (isset($_COOKIE[session_name()]) && session_start()) {
 // В суперглобальном массиве $_SERVER PHP сохраняет некторые заголовки запроса HTTP
 // и другие сведения о клиненте и сервере, например метод текущего запроса $_SERVER['REQUEST_METHOD'].
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+  if(isset($_POST['logout']) && session_start()){
+    session_unset();
+    session_destroy();
+    setcookie('session_name', '', 100000);
+    header('Location: login.php');
+    exit();
+  }
+  
 ?>
 <!DOCTYPE html>
 <html>
