@@ -184,7 +184,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       exit();
     }
 
-    
+    $sql = "SELECT pl.id_lang FROM user_lang pl JOIN users l ON pl.id = l.id  WHERE l.login = :login;";
+        try{
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
+            $stmt->execute();
+            $lang = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+            $langs_value1 =(implode(",", $lang));
+            $values['lang']=$langs_value1;
+        }
+        catch(PDOException $e){
+            print('Error : ' . $e->getMessage());
+            exit();
+        }
+
+    /*
     try {
       $get_lang=[];
       $mas=[];
@@ -205,7 +219,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   } catch (PDOException $e){
       print('Error : ' . $e->getMessage());
       exit();
-  }
+  }*/
 
     $login_message='Вход с логином: '. $_SESSION['login'] . ", uid: ". $_SESSION['uid'];
     $messages[] = $login_message; //('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
