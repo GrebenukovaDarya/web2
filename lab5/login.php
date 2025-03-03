@@ -42,7 +42,7 @@ function password_check($login, $password, $db) {
 
 // В суперглобальном массиве $_SESSION хранятся переменные сессии.
 // Будем сохранять туда логин после успешной авторизации.
-$login_check;
+
 $session_started = false;
 
 if (isset($_COOKIE[session_name()]) && session_start() && $login_check) {
@@ -104,6 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 </html>
 
 <?php
+$login_check;
+
 }
 // Иначе, если запрос был методом POST, т.е. нужно сделать авторизацию с записью логина в сессию.
 else {
