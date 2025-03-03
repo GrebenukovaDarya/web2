@@ -40,12 +40,7 @@ function password_check($login, $password, $db) {
   return ($passw==$password);
 }
 
-if(isset($_POST['logout'])){
-  session_unset();
-  session_destroy();
-  header('Location: file.php');
-  exit();
-}
+
 
 // В суперглобальном массиве $_SESSION хранятся переменные сессии.
 // Будем сохранять туда логин после успешной авторизации.
@@ -59,6 +54,15 @@ if (isset($_COOKIE[session_name()]) && session_start()) {
     // TODO: Сделать выход (окончание сессии вызовом session_destroy()
     // при нажатии на кнопку Выход).
     // Делаем перенаправление на форму.
+
+    if(isset($_POST['logout'])){
+      session_unset();
+      session_destroy();
+      header('Location: login.php');
+      exit();
+    }
+
+
     header('Location: ./');
     exit();
   }
@@ -136,6 +140,5 @@ else {
     print('Неверный логин или пароль'); 
   }
 
-  
-  //header('Location: ./');
+
 }
