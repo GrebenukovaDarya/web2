@@ -186,9 +186,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     
     try {
-      $mas=[];
       $get_lang=[];
-
+      $mas=[];
       $stmt_lang = $db->prepare("SELECT id_lang FROM user_lang WHERE id = ?");
       $stmt_lang->execute([$_SESSION['uid']]);
       $mas = $stmt_lang->fetch(PDO::FETCH_ASSOC);
@@ -198,16 +197,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       foreach ($mas as $id) {
         
           $stmt_get_lang->execute([$id]);
-          $lang_name = $stmt_lang->fetchColumn();
+          $lang_name = $stmt_get_lang->fetchColumn();
           $get_lang = $lang_name;
       }
+          
       $values['lang'] = $get_lang;
   } catch (PDOException $e){
       print('Error : ' . $e->getMessage());
       exit();
   }
 
-    $login_message='вход с логином: '. $_SESSION['login'] . ", uid: ". $_SESSION['uid'];
+    $login_message='Вход с логином: '. $_SESSION['login'] . ", uid: ". $_SESSION['uid'];
     $messages[] = $login_message; //('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
     //printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
   }

@@ -8,6 +8,7 @@ html{
     font-family: "Mac";
     letter-spacing: 1px;
     color: #272931;
+    padding: 2px;
 }
 
 .error_messages{
