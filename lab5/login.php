@@ -32,11 +32,11 @@ function password_check($login, $password, $db) {
     $stmt = $db->prepare("SELECT password FROM users WHERE login = ?");
     $stmt->execute([$login]);
     $passw = $stmt->fetchColumn();
-
+    print("check");
     if($passw===false){
       return false;
     }
-
+    print(password_verify($password, $passw));
     return password_verify($password, $passw);
   } 
   catch (PDOException $e){
