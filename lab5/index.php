@@ -366,14 +366,18 @@ else {
         $stmt_update = $db->prepare("UPDATE application SET fio=?, number=?, email=?, bdate=?, gender=?, biography=?, checkbox=? WHERE id=?");
         $stmt_update->execute([$_POST['fio'], $_POST['number'], $_POST['email'], $_POST['birthdate'], $_POST['radio-group-1'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0, $user_id ]);
     
+        $stmt_delete = $db->prepare("DELETE FROM user_lang WHERE id=?");
+        $stmt_delete -> execute([$user_id]);
+
         $stmt_select = $db->prepare("SELECT id_lang FROM prog_lang WHERE lang_name = ?");
-        $stmt_lang_update = $db->prepare("UPDATE user_lang SET id_lang=? WHERE id=?");
+
+        $stmt_lang_update = $db->prepare("INSERT INTO user_lang (id, id_lang) VALUES (?,?)");
         foreach ($languages as $language) {
             $stmt_select ->execute([$language]);
             $id_lang = $stmt_select->fetchColumn();
       
             if ($id_lang) {
-                $stmt_lang_update->execute([$id_lang, $id]);
+                $stmt_lang_update->execute([$user_id, $id_lang]);
             }
         }
     } catch (PDOException $e){
