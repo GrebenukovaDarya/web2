@@ -13,11 +13,13 @@
     </form>
 
     <?php 
-      $_SESSION['login']="";
-      $_SESSION['uid']="";
-      session_destroy();
-      header('Location: ./');
-      exit();
+      if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_SESSION['login']="";
+        $_SESSION['uid']="";
+        session_destroy();
+        header('Location: login.php');
+        exit();
+      }
     ?>
 
     <div class="error_messages" <?php if (empty($messages)) {print 'display="none"';} else {print 'display="block"';} ?>>
