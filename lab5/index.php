@@ -167,11 +167,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   if (/*empty($errors) &&*/ isset($_COOKIE[session_name()]) &&
       session_start() && !empty($_SESSION['login'])) {
 
+    $mas=[];
+
     try{
 
       $stmt = $db->prepare("SELECT fio, number, email, biography AS bio, gender AS gen, bdate, checkbox FROM application WHERE id = ?");
       $stmt->execute([$_SESSION['uid']]);
-      $mas = $stmt->fetchArray();
+      $mas = $stmt->fetch(PDO::FETCH_ASSOC);
       $fields = ['fio', 'number', 'email', 'bio', 'gen', 'bdate', 'checkbox'];
       foreach($fields as $field) {
           $values[$field] = strip_tags($mas[$field]);

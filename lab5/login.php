@@ -74,8 +74,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   <body>
 
     <form class="login_form" action="" method="post">
-      <input name="login" />
-      <input name="password" />
+      <label> 
+        Логин <br/>
+        <input name="login" />
+      </label> <br/>
+      <label> 
+        Пароль <br/>
+        <input name="password" />
+      </label> <br/>
       <input class="login_button" type="submit" value="Войти" />
     </form>
 
@@ -90,7 +96,6 @@ else {
   if(isset($_POST['logout'])){
     session_unset();
     session_destroy();
-    //setcookie('session_name', '', 100000);
     header('Location: login.php');
     exit();
   }

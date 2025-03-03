@@ -118,6 +118,10 @@ select{
     accent-color:  #997bde;
 }
 
+.login_form input{
+    border: #b25e85;
+}
+
 
 @font-face {
     font-family: "Mac";
