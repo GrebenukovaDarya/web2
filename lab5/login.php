@@ -73,10 +73,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   </head>
   <body>
 
-    <form action="" method="post">
+    <form class="login_form" action="" method="post">
       <input name="login" />
       <input name="password" />
-      <input type="submit" value="Войти" />
+      <input class="login_button" type="submit" value="Войти" />
     </form>
 
   </body>
