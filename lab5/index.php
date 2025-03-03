@@ -210,8 +210,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   }
       */
 
-    $str_login='вход с логином: '+ $_SESSION['login'] + "uid: " + $_SESSION['uid'];
-    $messages[] = $str_login; //('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
+    $login_message='вход с логином: '. $_SESSION['login'] . ", uid: ". $_SESSION['uid'];
+    $messages[] = $login_message; //('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
     //printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
   }
 
