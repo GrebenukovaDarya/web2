@@ -364,7 +364,7 @@ else {
     //update
     try {
         $stmt_update = $db->prepare("UPDATE application SET fio=?, number=?, email=?, bdate=?, gender=?, biography=?, checkbox=? WHERE id=?");
-        $stmt_update->execute([$_POST['fio'], $_POST['number'], $_POST['email'], $_POST['birthdate'], $_POST['radio-group-1'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0]);
+        $stmt_update->execute([$_POST['fio'], $_POST['number'], $_POST['email'], $_POST['birthdate'], $_POST['radio-group-1'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0], $user_id);
     
         $stmt_select = $db->prepare("SELECT id_lang FROM prog_lang WHERE lang_name = ?");
         $stmt_lang_update = $db->prepare("UPDATE user_lang SET id_lang=? WHERE id=?");
