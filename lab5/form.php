@@ -10,7 +10,7 @@
 
     <?php 
     if(isset($_COOKIE[session_name()])){
-      print('<form class="logout_form" action="" method="POST">
+      print('<form class="logout_form" action="login.php" method="POST">
       <input type="submit" name="logout" value="Выйти"/> 
     </form>');
     }
