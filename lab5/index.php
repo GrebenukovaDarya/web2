@@ -377,7 +377,7 @@ else {
             }
         }
     } catch (PDOException $e){
-        print('Error : ' . $e->getMessage());
+        print('update Error : ' . $e->getMessage());
         exit();
     }
 
@@ -441,3 +441,6 @@ else {
   header('Location: ./');
 
 }
+
+//52083a9dcc9b0304
+//6173DiOvzgJf
