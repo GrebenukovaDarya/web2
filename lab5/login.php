@@ -47,7 +47,7 @@ function password_check($login, $password, $db) {
 if(isset($_POST['logout'])){
   session_unset();
   session_destroy();
-  header('Locatio: login.php');
+  header('Location: login.php');
   exit();
 }
 
