@@ -36,7 +36,7 @@ function password_check($login, $password, $db) {
     if($passw===false){
       return false;
     }
-    print(password_verify($password, $passw));
+    print("check2");
     return password_verify($password, $passw);
   } 
   catch (PDOException $e){
