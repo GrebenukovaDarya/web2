@@ -42,6 +42,15 @@ function password_check($login, $password, $db) {
 
 // В суперглобальном массиве $_SESSION хранятся переменные сессии.
 // Будем сохранять туда логин после успешной авторизации.
+
+
+if(isset($_POST['logout'])){
+  session_unset();
+  session_destroy();
+  header('Locatio: login.php');
+  exit();
+}
+
 $session_started = false;
 
 if (isset($_COOKIE[session_name()]) && session_start()) {
