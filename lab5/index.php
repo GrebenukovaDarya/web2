@@ -168,8 +168,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       session_start() && !empty($_SESSION['login'])) {
 
     try{
-      $stmt = $db->prepare("SELECT fio, number, email, biography AS bio, gender AS gen, bdate, checkbox FROM application WHERE login = ?");
-      $stmt->execute([$_SESSION['login']]);
+
+      $stmt = $db->prepare("SELECT fio, number, email, biography AS bio, gender AS gen, bdate, checkbox FROM application WHERE id = ?");
+      $stmt->execute([$_SESSION['uid']]);
       $mas = $stmt->fetchArray();
       $fields = ['fio', 'number', 'email', 'bio', 'gen', 'bdate', 'checkbox'];
       foreach($fields as $field) {
