@@ -49,7 +49,7 @@ if ($_COOKIE[session_name()] && session_start()) {
   if (!empty($_SESSION['login'])) {
     // Если есть логин в сессии, то пользователь уже авторизован.
     // TODO: Сделать выход (окончание сессии вызовом session_destroy()
-    //при нажатии на кнопку Выход).
+    // при нажатии на кнопку Выход).
     // Делаем перенаправление на форму.
     header('Location: ./');
     exit();
@@ -82,31 +82,32 @@ else {
 
   // TODO: Проверть есть ли такой логин и пароль в базе данных.
   // Выдать сообщение об ошибках.
-  
-/*
-  try{
-    $stmt = $db->prepare("SELECT login FROM application WHERE login=?");
-    $stmt->execute([]);
-  } 
-  catch (PDOException $e){
-    print('Error : ' . $e->getMessage());
-    exit();
-  }*/
 
   if (!$session_started) {
     session_start();
   }
   // Если все ок, то авторизуем пользователя.
   if (isValid($login, $db) || password_check($login, $password, $db)){
-  $_SESSION['login'] = $_POST['login'];
-  // Записываем ID пользователя.
+    $_SESSION['login'] = $_POST['login'];
+    // Записываем ID пользователя.
 
-  $_SESSION['uid'] = 123;//uniqid(string $prefix = "", bool $more_entropy = false);
+    $_SESSION['uid'];
+      try {
+          $stmt_select = $db->prepare("SELECT id FROM users WHERE login=?");
+          $stmt_select->execute([$_SESSION['login']]);
+          $_SESSION['uid']  = $stmt_select->fetchColumn();
+      } catch (PDOException $e){
+          print('Error : ' . $e->getMessage());
+          exit();
+      }
+
+      // Делаем перенаправление.
+      header('Location: ./');
   }
   else { 
     print('Неверный логин или пароль'); 
   }
 
-  // Делаем перенаправление.
-  header('Location: ./');
+  
+  //header('Location: ./');
 }
