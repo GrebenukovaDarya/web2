@@ -40,14 +40,12 @@ function password_check($login, $password, $db) {
   return ($passw==$password);
 }
 
-
-
 // В суперглобальном массиве $_SESSION хранятся переменные сессии.
 // Будем сохранять туда логин после успешной авторизации.
 
 $session_started = false;
 
-if (isset($_COOKIE[session_name()]) && session_start()) {
+if (isset($_COOKIE[session_name()]) && session_start() && $login_check) {
   $session_started = true;
   if (!empty($_SESSION['login'])) {
     // Если есть логин в сессии, то пользователь уже авторизован.
@@ -85,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   <body>
 
   <?php
-      if (!empty($login_check)) {
+      if (!$login_check) {
         print('<div id="login_messages"> Неверный логин или пароль </div>');
       }
       ?>
@@ -143,7 +141,7 @@ else {
       header('Location: ./');
   }
   else { 
-
+    $login_check = false;
     header('Location: login.php');
   }
 
