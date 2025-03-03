@@ -166,22 +166,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   // ранее в сессию записан факт успешного логина.
   if (empty($errors) && !empty($_COOKIE[session_name()]) &&
       session_start() && !empty($_SESSION['login'])) {
-    // TODO: загрузить данные пользователя из БД
-    // и заполнить переменную $values,
-    // предварительно санитизовав.
-    // Для загрузки данных из БД делаем запрос SELECT и вызываем метод PDO fetchArray(), fetchObject() или fetchAll() 
 
     try{
       $stmt = $db->prepare("SELECT fio, number, email, biography AS bio, gender AS gen, bdate, checkbox FROM application WHERE login = ?");
       $stmt->execute([$_SESSION['login']]);
-      $values = $stmt->fetchArray();
+      $mas = $stmt->fetchArray();
+      $fields = ['fio', 'number', 'email', 'bio', 'gen', 'bdate', 'checkbox'];
+      foreach($fields as $field) {
+          $values[$field] = strip_tags($mas[$field]);
+      }
     } 
     catch (PDOException $e){
       print('Error : ' . $e->getMessage());
       exit();
     }
 
-    printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
+    /*
+    try {
+      $get_lang=[];
+
+      $stmt_select = $db->prepare("SELECT id FROM application WHERE fio=?");
+      $stmt_lang = $db->prepare("SELECT lang_name FROM user_lang WHERE id = ?");
+
+      $allowed_langs=getLangs($db);
+
+      $user_id=$stmt_select->execute([$values['fio']]);
+
+      foreach ($languages as $language) {
+        
+          $stmt_lang->execute([$user_id]);
+          $id_lang = $stmt_lang->fetchColumn();
+    
+          if ($id_lang) {
+              $get_lang=$stmt_lang->execute([$id_lang, $id]);
+          }
+      }
+  } catch (PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+  }
+      */
+
+    $str_login='вход с логином: '+ $_SESSION['login'] + "uid: " + $_SESSION['uid'];
+    $messages[] = $str_login; //('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
+    //printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
   }
 
   include('form.php');
@@ -358,11 +386,11 @@ else {
   $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
   $login = substr(md5(time()), 0, 16); //substr(str_shuffle($permitted_chars), 0, 10);
-  while(isValid($login)){
+  while(isValid($login, $db)){
     $login = substr(md5(time()), 0, 16);
   }
   $password = substr(str_shuffle($permitted_chars), 0, 12); //uniqid(string $prefix = "", bool $more_entropy = false);
-  $hash_password = md5($password);
+  $hash_password = password_hash($password, PASSWORD_DEFAULT);
   // Сохраняем в Cookies.
   setcookie('login', $login);
   setcookie('password', $password);
