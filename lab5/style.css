@@ -75,6 +75,15 @@ select{
     background-color: #febbcb;
   }
 
+.logout_form{
+    max-width: 20%;
+    margin-left: auto;
+    margin-right:0%;
+    align-content:end;
+    max-height: fit-content;
+    text-align: end;
+}
+
 @font-face {
     font-family: "Mac";
     src: url("Kanit-Cyrillic.ttf") format("truetype");

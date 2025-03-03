@@ -8,11 +8,14 @@
   </head>
   <body>
 
-    <form action="" method="POST">
-      <input type="submit" value="Выйти"/> 
-    </form>
-
     <?php 
+    if(isset($_COOKIE[session_name()])){
+      print('<form class="logout_form" action="" method="POST">
+      <input type="submit" name="logout" value="Выйти"/> 
+    </form>');
+    }
+
+    /*
       if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_SESSION['login']="";
         $_SESSION['uid']="";
@@ -20,6 +23,7 @@
         header('Location: login.php');
         exit();
       }
+        */
     ?>
 
     <div class="error_messages" <?php if (empty($messages)) {print 'display="none"';} else {print 'display="block"';} ?>>
