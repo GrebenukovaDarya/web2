@@ -167,9 +167,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   if (/*empty($errors) &&*/ isset($_COOKIE[session_name()]) &&
       session_start() && !empty($_SESSION['login'])) {
 
-    $mas=[];
 
     try{
+      $mas=[];
 
       $stmt = $db->prepare("SELECT fio, number, email, biography AS bio, gender AS gen, bdate, checkbox FROM application WHERE id = ?");
       $stmt->execute([$_SESSION['uid']]);
@@ -184,31 +184,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       exit();
     }
 
-    /*
+    
     try {
+      $mas=[];
       $get_lang=[];
 
-      $stmt_select = $db->prepare("SELECT id FROM application WHERE fio=?");
-      $stmt_lang = $db->prepare("SELECT lang_name FROM user_lang WHERE id = ?");
+      $stmt_lang = $db->prepare("SELECT id_lang FROM user_lang WHERE id = ?");
+      $stmt_lang->execute([$_SESSION['uid']]);
+      $mas = $stmt_lang->fetch(PDO::FETCH_ASSOC);
 
-      $allowed_langs=getLangs($db);
+      $stmt_get_lang = $db->prepare("SELECT lang_name FROM prog_lang WHERE id_lang=?");
 
-      $user_id=$stmt_select->execute([$values['fio']]);
-
-      foreach ($languages as $language) {
+      foreach ($mas as $id) {
         
-          $stmt_lang->execute([$user_id]);
-          $id_lang = $stmt_lang->fetchColumn();
-    
-          if ($id_lang) {
-              $get_lang=$stmt_lang->execute([$id_lang, $id]);
-          }
+          $stmt_get_lang->execute([$id]);
+          $lang_name = $stmt_lang->fetchColumn();
+          $get_lang = $lang_name;
       }
+      $values['lang'] = $get_lang;
   } catch (PDOException $e){
       print('Error : ' . $e->getMessage());
       exit();
   }
-      */
 
     $login_message='вход с логином: '. $_SESSION['login'] . ", uid: ". $_SESSION['uid'];
     $messages[] = $login_message; //('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
