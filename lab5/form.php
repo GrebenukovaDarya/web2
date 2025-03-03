@@ -8,6 +8,18 @@
   </head>
   <body>
 
+    <form action="" method="POST">
+      <input type="submit" value="Выйти"/> 
+    </form>
+
+    <?php 
+      $_SESSION['login']="";
+      $_SESSION['uid']="";
+      session_destroy();
+      header('Location: ./');
+      exit();
+    ?>
+
     <div class="error_messages" <?php if (empty($messages)) {print 'display="none"';} else {print 'display="block"';} ?>>
 
       <?php
@@ -21,7 +33,7 @@
       ?>
 
     </div>
-    
+
 
     <div class="formstyle" > 
       <form id="myform" class="formcarryForm" action="index.php" method="POST">
