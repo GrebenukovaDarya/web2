@@ -19,8 +19,8 @@ html{
     border-style: double;
     border-radius: 15px;
     border-width: 5px;
-    border-color: #be8b5b;
-    background-color: #eccaa6;
+    border-color: #6f4d9f;
+    background-color: #a4afdb;
 }
 
 .login_messages{
@@ -31,8 +31,8 @@ html{
     border-style: dotted;
     border-radius: 15px;
     border-width: 5px;
-    border-color: #6f4d9f;
-    background-color: #a4afdb;
+    border-color: #be8b5b;
+    background-color: #eccaa6;
 }
 
 .application{
