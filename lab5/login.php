@@ -86,14 +86,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 // Иначе, если запрос был методом POST, т.е. нужно сделать авторизацию с записью логина в сессию.
 else {
-  
-if(isset($_POST['logout']) && session_start()){
-  session_unset();
-  session_destroy();
-  setcookie('session_name', '', 100000);
-  header('Location: login.php');
-  exit();
-}
 
   $login = $_POST['login'];
   $password = password_hash($_POST['password'], PASSWORD_DEFAULT);

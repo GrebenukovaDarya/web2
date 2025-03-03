@@ -41,6 +41,15 @@ function isValid($login, $db) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
+  
+  if(isset($_POST['logout']) && session_start()){
+    session_unset();
+    session_destroy();
+    //setcookie('session_name', '', 100000);
+    header('Location: login.php');
+    exit();
+  }
+
   $messages = array();
 
   if (!empty($_COOKIE['save'])) {
