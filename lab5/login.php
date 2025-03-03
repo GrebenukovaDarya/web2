@@ -37,7 +37,7 @@ function password_check($login, $password, $db) {
     print('Error : ' . $e->getMessage());
     exit();
   }
-  return ($passw===$password);
+  return $passw == $password;
 }
 
 
@@ -120,7 +120,7 @@ else {
     session_start();
   }
   // Если все ок, то авторизуем пользователя.
-  if (isValid($login, $db) /*&& password_check($login, $password, $db)*/){
+  if (isValid($login, $db) && password_check($login, $password, $db)){
     $_SESSION['login'] = $_POST['login'];
     // Записываем ID пользователя.
 
