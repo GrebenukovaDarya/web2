@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   <body>
 
   <?php
-      if (!empty($messages)) {
+      if (!empty($login_messages)) {
         print('<div id="login_messages">');
         foreach ($messages as $message) {
           print($message);
@@ -155,10 +155,11 @@ else {
       header('Location: ./');
   }
   else {
-    //$messages[] = 'Неверный логин или пароль';
+    $login_messages[] = 'Неверный логин или пароль';
     //$login_messages="<div class='login_messages'>Неверный логин или пароль</div>";
     //header('Location: login.php');
-    print('Неверный логин или пароль'); 
+    //print('Неверный логин или пароль'); 
+    exit();
   }
 
 
