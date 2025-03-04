@@ -53,6 +53,7 @@ function password_check($login, $password, $db) {
 // Будем сохранять туда логин после успешной авторизации.
 
 $session_started = false;
+$login_messages;
 
 if (isset($_COOKIE[session_name()]) && session_start()) {
   $session_started = true;
