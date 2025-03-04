@@ -155,11 +155,11 @@ else {
       header('Location: ./');
   }
   else {
-    //$messages[] = 'Неверный логин или пароль';
+    $messages[] = 'Неверный логин или пароль';
     //$login_messages="<div class='login_messages'>Неверный логин или пароль</div>";
     //header('Location: login.php');
-    print('Неверный логин или пароль'); 
-    exit();
+    //print('Неверный логин или пароль'); 
+    //exit();
   }
 
 
