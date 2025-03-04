@@ -1,22 +1,3 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  href="style.css">
-    <title> LAB5 </title>
-  </head>
-  <body>
-
-  <?php
-      if (!empty($messages)) {
-        print('<div id="login_messages">');
-        foreach ($messages as $message) {
-          print($message);
-        }
-        print('</div>');
-      }
-      ?>
 
 <?php
 
@@ -101,7 +82,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   
 ?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="style.css">
+    <title> LAB5 </title>
+  </head>
+  <body>
 
+  <?php
+      if (!empty($messages)) {
+        print('<div id="login_messages">');
+        foreach ($messages as $message) {
+          print($message);
+        }
+        print('</div>');
+      }
+      ?>
 
     <form class="login_form" action="" method="post">
       <label> 
@@ -160,7 +159,7 @@ else {
     $messages[] = 'Неверный логин или пароль';
     //$login_messages="<div class='login_messages'>Неверный логин или пароль</div>";
     //header('Location: login.php');
-    //print('Неверный логин или пароль'); 
+    print('Неверный логин или пароль'); 
     //exit();
   }
 
