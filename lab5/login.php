@@ -53,7 +53,6 @@ function password_check($login, $password, $db) {
 // Будем сохранять туда логин после успешной авторизации.
 
 $session_started = false;
-$login_messages;
 
 if (isset($_COOKIE[session_name()]) && session_start()) {
   $session_started = true;
@@ -92,8 +91,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   </head>
   <body>
 
-  <?php print($login_messages);
-  ?>
+  <?php
+      if (!empty($messages)) {
+        print('<div id="login_messages">');
+        foreach ($messages as $message) {
+          print($message);
+        }
+        print('</div>');
+      }
+      ?>
 
     <form class="login_form" action="" method="post">
       <label> 
@@ -149,7 +155,8 @@ else {
       header('Location: ./');
   }
   else {
-    $login_messages="<div class='login_messages'>Неверный логин или пароль</div>";
+    $messages[] = 'Неверный логин или пароль';
+    //$login_messages="<div class='login_messages'>Неверный логин или пароль</div>";
     header('Location: login.php');
     //print('Неверный логин или пароль'); 
   }
