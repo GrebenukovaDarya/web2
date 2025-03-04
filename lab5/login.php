@@ -149,6 +149,7 @@ else {
   }
   else {
     $login_messages='<div class=login_messages>Неверный логин или пароль</div>';
+    header('Location: login.php');
     //print('Неверный логин или пароль'); 
   }
 
