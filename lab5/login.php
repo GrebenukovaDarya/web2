@@ -113,7 +113,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 else {
 
   $login = $_POST['login'];
-  $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+  //$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+  $password=$_POST['password'];
 
   $user = 'u68607';
   $pass = '7232008';
