@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   </head>
   <body>
 
-  <?php if(!empty($login_messages)){print($login_messages);}
+  <?php print($login_messages);
   ?>
 
     <form class="login_form" action="" method="post">
