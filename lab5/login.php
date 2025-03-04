@@ -149,7 +149,7 @@ else {
   }
   else {
     $login_messages='<div class=login_messages>Неверный логин или пароль</div>';
-    print('Неверный логин или пароль'); 
+    //print('Неверный логин или пароль'); 
   }
 
 
