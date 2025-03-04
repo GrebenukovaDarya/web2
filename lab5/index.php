@@ -184,10 +184,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       exit();
     }
 
-    $sql = "SELECT pl.id_lang FROM user_lang pl JOIN users l ON pl.id = l.id  WHERE l.login = :login;";
+    $sql = "select pl.lang_name from prog_lang pl JOIN user_lang ul ON pl.id_lang=ul.id_lang where ul.id = :login;";
         try{
             $stmt = $db->prepare($sql);
-            $stmt->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
+            $stmt->bindValue(':login', $_SESSION['uid'], PDO::PARAM_STR);
             $stmt->execute();
             $lang = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
             $langs_value1 =(implode(",", $lang));
