@@ -91,6 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   </head>
   <body>
 
+  <?php if(!empty($login_messages))? print($login_messages):'';
+  ?>
 
     <form class="login_form" action="" method="post">
       <label> 
@@ -111,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 // Иначе, если запрос был методом POST, т.е. нужно сделать авторизацию с записью логина в сессию.
 else {
-
+  $login_messages='';
   $login = $_POST['login'];
   //$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
   $password=$_POST['password'];
@@ -145,7 +147,8 @@ else {
       // Делаем перенаправление.
       header('Location: ./');
   }
-  else { 
+  else {
+    $login_messages='<div class=login_messages>Неверный логин или пароль</div>';
     print('Неверный логин или пароль'); 
   }
 
