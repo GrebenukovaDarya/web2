@@ -47,8 +47,12 @@
                     }
                         */
 
-                    $select_login = mysql_query("select login, id from users");
-                    while($row = mysql_fetch_object($select_login)){
+                    $stmt = $db->prepare("SELECT login, id FROM users");
+                    $stmt->execute();
+                    $mas = $stmt->fetch(PDO::FETCH_OBJECT);
+
+                    //$select_login = mysql_query("select login, id from users");
+                    while($row = $stmt->fetch(PDO::FETCH_OBJECT)){
                         $log->login;
                         $uid->id;
                         echo "<tr><td>$uid</td><td>$log</td>";
