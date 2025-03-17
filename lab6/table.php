@@ -70,6 +70,7 @@
                             echo "<td>$mas[$field]</td>";
                         }
                         echo "</tr>";
+                    }
                 } 
                 catch (PDOException $e){
                     print('ERROR : ' . $e->getMessage());
