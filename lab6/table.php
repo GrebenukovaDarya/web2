@@ -12,7 +12,6 @@
   <body>
 
     <table>
-
         <thead> 
             <tr>
                 <td>ID</td><td>LOGIN</td><td>FIO</td><td>NUMBER</td><td>EMAIL</td><td>GENDER</td><td>BIO</td><td>DATA</td><td>CHECK</td><td>LANGUAGES</td><td>CHANGE</td>
@@ -25,7 +24,6 @@
                 $pass = '7232008';
                 $db = new PDO('mysql:host=localhost;dbname=u68607', $user, $pass,
                   [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-
 
                 try{
 
@@ -52,10 +50,12 @@
                             $stmt_lang->bindValue(':login', $uid, PDO::PARAM_STR);
                             $stmt_lang->execute();
                             $lang = $stmt_lang->fetchAll(PDO::FETCH_COLUMN, 0);
-                            $langs_value1 =(implode(",", $lang));
+                            $langs_value1 =(implode(", ", $lang));
                             echo "<td>$langs_value1</td>";
 
-                        echo "</tr>";
+                        echo '<td class="buttons">'
+
+                        echo "</td></tr>";
                     }
                 }
                 } 
@@ -63,7 +63,6 @@
                     print('ERROR : ' . $e->getMessage());
                     exit();
                 }
-
             ?>
 
         </tbody>

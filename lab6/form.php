@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet"  href="style.css">
-    <title> LAB5 </title>
+    <title> LAB6 </title>
   </head>
   <body>
 
@@ -14,10 +14,7 @@
       <input type="submit" name="logout" value="Выйти"/> 
     </form>');
     }
-
-    
     ?>
-
 
     <div class="error_messages" <?php if (empty($messages)) {print 'display="none"';} else {print 'display="block"';} ?>>
 
@@ -108,6 +105,5 @@
       </form>
     </div>
 
-  
   </body>
 </html>
