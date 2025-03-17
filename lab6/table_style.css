@@ -1,5 +1,6 @@
 html{
     background-color:rgb(244, 244, 252);
+    font-family: "Mac";
 }
 
 body{
@@ -54,3 +55,12 @@ tbody td{
 
 
 /* border-style: outset; для кнопок*/
+
+
+@font-face {
+    font-family: "Mac";
+    src: url("Kanit-Cyrillic.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
