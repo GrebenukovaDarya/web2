@@ -52,7 +52,7 @@
                             $stmt->execute();
                             $lang = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
                             $langs_value1 =(implode(",", $lang));
-                            echo "<td>$langs_value1</td>"
+                            echo "<td>$langs_value1</td>";
 
                         echo "</tr>";
                     }
