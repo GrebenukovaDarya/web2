@@ -60,12 +60,14 @@ tbody td{
 .delete_button{
     border: 3px outset rgb(206, 86, 122);
     background-color: #febbcb;
+    border-radius: 3px;
     color: rgb(134, 52, 63);
     margin: 1px;
     font-family: "Mac";
 }
 .change_button{
     border: 3px outset rgb(92, 171, 84);
+    border-radius: 3px;
     background-color: #c2febb;
     color: rgb(44, 105, 50);
     margin: 1px;
