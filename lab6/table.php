@@ -53,9 +53,11 @@
                             $langs_value1 =(implode(", ", $lang));
                             echo "<td>$langs_value1</td>";
 
-                        echo '<td class="buttons">';
-
-                        echo "</td></tr>";
+                        echo '<td class="buttons">
+                        <form action=" " method=" ">
+                        <input class="delete_button" type="submit" name="logout" value='$log'/>
+                        <input class="change_button" type="submit" name="logout" value='$log'/>
+                        </form></td></tr>';
                     }
                 }
                 } 
