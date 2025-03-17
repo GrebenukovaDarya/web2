@@ -62,12 +62,14 @@ tbody td{
     background-color: #febbcb;
     color: rgb(134, 52, 63);
     margin: 1px;
+    font-family: "Mac";
 }
 .change_button{
     border: 3px outset rgb(92, 171, 84);
     background-color: #c2febb;
     color: rgb(44, 105, 50);
     margin: 1px;
+    font-family: "Mac";
 }
 
 
