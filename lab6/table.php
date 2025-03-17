@@ -49,10 +49,10 @@
 
                     $stmt = $db->prepare("SELECT login, id FROM users");
                     $stmt->execute();
-                    $mas = $stmt->fetch(PDO::FETCH_OBJECT);
+                    //$mas = $stmt->fetch(PDO::FETCH_OBJECT);
 
                     //$select_login = mysql_query("select login, id from users");
-                    while($row = $stmt->fetch(PDO::FETCH_OBJECT)){
+                    while($row = $stmt->fetch(PDO::FETCH_OBJ)){
                         $log->login;
                         $uid->id;
                         echo "<tr><td>$uid</td><td>$log</td>";
