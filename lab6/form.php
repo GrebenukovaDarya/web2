@@ -10,9 +10,14 @@
 
     <?php 
     if(isset($_COOKIE[session_name()]) && !empty($_SESSION['login'])){
-      print('<form class="logout_form" action="login.php" method="POST">
-      <input type="submit" name="logout" value="Выйти"/> 
-    </form>');
+      if(!empty($_SESSION['admin'])){
+        print('<form class="logout_form" action="admin.php" method="POST">
+        <input type="submit" name="logout" value="Завершить изменения"/></form>');
+      }
+      else{
+        print('<form class="logout_form" action="login.php" method="POST">
+        <input type="submit" name="logout" value="Выйти"/></form>');
+      }
     }
     ?>
 
