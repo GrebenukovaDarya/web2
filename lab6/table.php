@@ -55,8 +55,8 @@
 
                         echo "<td class=\"buttons\">
                         <form action=\" \" method=\" \">
-                        <input class=\"delete_button\" type=\"submit\" name=\"logout\" value=\"$log\"/>
-                        <input class=\"change_button\" type=\"submit\" name=\"logout\" value=\"$log\">
+                        <input class=\"delete_button\" type=\"submit\" name=\"$log\" value=\"удалить\"/>
+                        <input class=\"change_button\" type=\"submit\" name=\"$log\" value=\"изменить\">
                         </form></td></tr>";
                     }
                 }
