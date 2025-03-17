@@ -15,7 +15,7 @@
 
         <thead> 
             <tr>
-                <td>ID</td><td>LOGIN</td><td>FIO</td><td>NUMBER</td><td>EMAIL</td><td>GENDER</td><td>BIO</td><td>CHECK</td><td>LANGUAGES</td><td>CHANGE</td>
+                <td>ID</td><td>LOGIN</td><td>FIO</td><td>NUMBER</td><td>EMAIL</td><td>GENDER</td><td>BIO</td><td>DATA</td><td>CHECK</td><td>LANGUAGES</td><td>CHANGE</td>
             </tr>
         </thead> 
 
