@@ -62,7 +62,7 @@
                         $uid=$row->id;
                         echo "<tr><td>$uid</td><td>$log</td>";
                         $form_data = $db->prepare("SELECT fio, number, email, biography AS bio, gender AS gen, bdate, checkbox FROM application WHERE id = ?");
-                        $form_data->execute();
+                        $form_data->execute([$uid]);
                         $mas = $form_data->fetch(PDO::FETCH_ASSOC);
                         //$fields = ['fio', 'number', 'email', 'bio', 'gen', 'bdate', 'checkbox'];
                         foreach($mas as $field) {
