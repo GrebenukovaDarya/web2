@@ -29,7 +29,7 @@
 
                 try{
 
-                    $stmt = $db->prepare("SELECT login, id, role FROM users");
+                    $stmt = $db->prepare("SELECT login, id, role FROM users ORDER BY (id) desc");
                     $stmt->execute();
                     $log;
                     $uid;
