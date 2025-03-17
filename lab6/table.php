@@ -52,9 +52,11 @@
                     //$mas = $stmt->fetch(PDO::FETCH_OBJECT);
 
                     //$select_login = mysql_query("select login, id from users");
+                    $log;
+                    $uid;
                     while($row = $stmt->fetch(PDO::FETCH_OBJ)){
-                        $log->login;
-                        $uid->id;
+                        $log=$row->login;
+                        $uid=$row->id;
                         echo "<tr><td>$uid</td><td>$log</td>";
                     }
                 } 
