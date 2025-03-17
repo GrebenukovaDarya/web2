@@ -15,7 +15,7 @@
 
         <thead> 
             <tr>
-                <td>ID</td><td>LOGIN</td><td>FIO</td><td>NUMBER</td><td>EMAIL</td><td>LANGUAGES</td><td>GENDER</td><td>BIO</td><td>CHECK</td><td>CHANGE</td>
+                <td>ID</td><td>LOGIN</td><td>FIO</td><td>NUMBER</td><td>EMAIL</td><td>GENDER</td><td>BIO</td><td>CHECK</td><td>LANGUAGES</td><td>CHANGE</td>
             </tr>
         </thead> 
 
@@ -28,30 +28,6 @@
 
 
                 try{
-                    /*
-                    mysql_connect("hostname", "user", "password");
-                    mysql_select_db("mydb");
-                    $result = mysql_query("select * from mytable");
-                    while ($row = mysql_fetch_object($result)) {
-                        echo $row->user_id;
-                        echo $row->fullname;
-                    }
-                    mysql_free_result($result);
-              
-                    $stmt = $db->prepare("SELECT fio, number, email, biography AS bio, gender AS gen, bdate, checkbox FROM application");
-                    $stmt->execute();
-                    $mas = $stmt->fetch(PDO::FETCH_OBJECT);
-                    $fields = ['fio', 'number', 'email', 'bio', 'gen', 'bdate', 'checkbox'];
-                    foreach($fields as $field) {
-                        $values[$field] = strip_tags($mas[$field]);
-                    }
-
-                    $mas = $stmt->fetch(PDO::FETCH_ASSOC);
-      $fields = ['fio', 'number', 'email', 'bio', 'gen', 'bdate', 'checkbox'];
-      foreach($fields as $field) {
-          $values[$field] = strip_tags($mas[$field]);
-      }
-                        */
 
                     $stmt = $db->prepare("SELECT login, id FROM users");
                     $stmt->execute();
@@ -61,14 +37,23 @@
                         $log=$row->login;
                         $uid=$row->id;
                         echo "<tr><td>$uid</td><td>$log</td>";
-                        $form_data = $db->prepare("SELECT fio, number, email, biography AS bio, gender AS gen, bdate, checkbox FROM application WHERE id = ?");
+
+                        $form_data = $db->prepare("SELECT fio, number, email, gender AS gen, biography AS bio, bdate, checkbox FROM application WHERE id = ?");
                         $form_data->execute([$uid]);
                         $mas = $form_data->fetch(PDO::FETCH_ASSOC);
-                        //$fields = ['fio', 'number', 'email', 'bio', 'gen', 'bdate', 'checkbox'];
                         foreach($mas as $field) {
-                            //$values[$field] = strip_tags($mas[$field]);
                             echo "<td>$field</td>";
                         }
+
+                        $sql = "select pl.lang_name from prog_lang pl JOIN user_lang ul ON pl.id_lang=ul.id_lang where ul.id = :login;";
+                        
+                            $stmt = $db->prepare($sql);
+                            $stmt->bindValue(':login', $uid, PDO::PARAM_STR);
+                            $stmt->execute();
+                            $lang = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+                            $langs_value1 =(implode(",", $lang));
+                            echo "<td>$langs_value1</td>"
+
                         echo "</tr>";
                     }
                 } 
