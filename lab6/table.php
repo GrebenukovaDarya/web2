@@ -53,7 +53,7 @@
                             $langs_value1 =(implode(", ", $lang));
                             echo "<td>$langs_value1</td>";
 
-                        echo '<td class="buttons">'
+                        echo '<td class="buttons">';
 
                         echo "</td></tr>";
                     }
