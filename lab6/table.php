@@ -29,11 +29,12 @@
 
                 try{
 
-                    $stmt = $db->prepare("SELECT login, id FROM users");
+                    $stmt = $db->prepare("SELECT login, id, role FROM users");
                     $stmt->execute();
                     $log;
                     $uid;
                     while($row = $stmt->fetch(PDO::FETCH_OBJ)){
+                        if($row->role=='user'){
                         $log=$row->login;
                         $uid=$row->id;
                         echo "<tr><td>$uid</td><td>$log</td>";
@@ -56,6 +57,7 @@
 
                         echo "</tr>";
                     }
+                }
                 } 
                 catch (PDOException $e){
                     print('ERROR : ' . $e->getMessage());
