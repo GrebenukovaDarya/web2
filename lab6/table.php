@@ -67,7 +67,7 @@
                         //$fields = ['fio', 'number', 'email', 'bio', 'gen', 'bdate', 'checkbox'];
                         foreach($mas as $field) {
                             //$values[$field] = strip_tags($mas[$field]);
-                            echo "<td>$mas[$field]</td>";
+                            echo "<td>$field</td>";
                         }
                         echo "</tr>";
                     }
