@@ -47,10 +47,10 @@
 
                         $sql = "select pl.lang_name from prog_lang pl JOIN user_lang ul ON pl.id_lang=ul.id_lang where ul.id = :login;";
                         
-                            $stmt = $db->prepare($sql);
-                            $stmt->bindValue(':login', $uid, PDO::PARAM_STR);
-                            $stmt->execute();
-                            $lang = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+                            $stmt_lang = $db->prepare($sql);
+                            $stmt_lang->bindValue(':login', $uid, PDO::PARAM_STR);
+                            $stmt_lang->execute();
+                            $lang = $stmt_lang->fetchAll(PDO::FETCH_COLUMN, 0);
                             $langs_value1 =(implode(",", $lang));
                             echo "<td>$langs_value1</td>";
 
