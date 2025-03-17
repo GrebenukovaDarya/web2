@@ -45,32 +45,38 @@
                     foreach($fields as $field) {
                         $values[$field] = strip_tags($mas[$field]);
                     }
+
+                    $mas = $stmt->fetch(PDO::FETCH_ASSOC);
+      $fields = ['fio', 'number', 'email', 'bio', 'gen', 'bdate', 'checkbox'];
+      foreach($fields as $field) {
+          $values[$field] = strip_tags($mas[$field]);
+      }
                         */
 
                     $stmt = $db->prepare("SELECT login, id FROM users");
                     $stmt->execute();
-                    //$mas = $stmt->fetch(PDO::FETCH_OBJECT);
-
-                    //$select_login = mysql_query("select login, id from users");
                     $log;
                     $uid;
                     while($row = $stmt->fetch(PDO::FETCH_OBJ)){
                         $log=$row->login;
                         $uid=$row->id;
                         echo "<tr><td>$uid</td><td>$log</td>";
-                    }
+                        $form_data = $db->prepare("SELECT fio, number, email, biography AS bio, gender AS gen, bdate, checkbox FROM application WHERE id = ?");
+                        $form_data->execute();
+                        $mas = $form_data->fetch(PDO::FETCH_ASSOC);
+                        //$fields = ['fio', 'number', 'email', 'bio', 'gen', 'bdate', 'checkbox'];
+                        foreach($mas as $field) {
+                            //$values[$field] = strip_tags($mas[$field]);
+                            echo "<td>$mas[$field]</td>";
+                        }
+                        echo "</tr>";
                 } 
                 catch (PDOException $e){
                     print('ERROR : ' . $e->getMessage());
                     exit();
                 }
 
-
             ?>
-
-            <tr>
-                <td>1</td><td>134ktb234jv34</td><td>w4e ty act</td><td>+9479562437</td><td>weyvtbch@havwrb.com</td><td>c</td><td>m</td><td>B wlrug wekjcbw webt 6ev IO</td><td>1</td><td>CHANGE</td>
-            </tr>
 
         </tbody>
 
