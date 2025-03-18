@@ -54,9 +54,12 @@
 
                         echo "<td class=\"buttons\">
                         <form action=\" \" method=\" \">
-                        <input class=\"delete_button\" type=\"submit\" name=\"$log\" value=\"удалить\"/> <br>
                         <input class=\"change_button\" type=\"submit\" name=\"$log\" value=\"изменить\">
-                        </form></td></tr>";
+                        </form></td></tr>
+                        ";
+
+                        /*
+                        <input class=\"delete_button\" type=\"submit\" name=\"$log\" value=\"удалить\"/> <br>*/
                     
                 }
                 } 
@@ -66,9 +69,7 @@
                 }
 
             ?>
-
         </tbody>
-
     </table>
 
     <?php
@@ -85,9 +86,6 @@
             print('ERROR : ' . $e->getMessage());
             exit();
         }
-
-        //select lang_name, count(id) from user_lang join prog_lang using (id_lang) GROUP BY id_lang;
     ?>
-
   </body>
 </html>
