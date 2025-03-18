@@ -74,6 +74,14 @@ tbody td{
     font-family: "Mac";
 }
 
+.message{
+    border: 3px outset rgb(92, 171, 84);
+    border-radius: 3px;
+    background-color: #c2febb;
+    color: rgb(44, 105, 50);
+    margin: 1px;
+}
+
 
 @font-face {
     font-family: "Mac";
