@@ -91,6 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       <input class="login_button" type="submit" value="Войти" />
     </form>
 
+    <a href="admin.php">Войти как администратор</a>
+
   </body>
 </html>
 
