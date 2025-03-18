@@ -73,7 +73,7 @@
 
     <?php
         try {
-            echo "<table><thead> <tr><td>LANGEAGE</td><td>Q</td></tr></thead> ";
+            echo "<table><thead> <tr><td>LANGUAGE</td><td>Q</td></tr></thead> ";
             $stmt = $db->prepare("SELECT lang_name, count(id) AS stat FROM user_lang JOIN prog_lang USING (id_lang) GROUP BY id_lang");
             $stmt->execute();
             while($row = $stmt->fetch(PDO::FETCH_OBJ)){
