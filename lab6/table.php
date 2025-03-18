@@ -27,12 +27,11 @@
 
                 try{
 
-                    $stmt = $db->prepare("SELECT login, id, role FROM users ORDER BY (id) desc");
+                    $stmt = $db->prepare("SELECT login, id, role FROM users WHERE role='user' ORDER BY (id) desc");
                     $stmt->execute();
                     $log;
                     $uid;
                     while($row = $stmt->fetch(PDO::FETCH_OBJ)){
-                        if($row->role=='user'){
                         $log=$row->login;
                         $uid=$row->id;
                         echo "<tr><td>$uid</td><td>$log</td>";
@@ -55,21 +54,40 @@
 
                         echo "<td class=\"buttons\">
                         <form action=\" \" method=\" \">
-                        <input class=\"delete_button\" type=\"submit\" name=\"$log\" value=\"удалить\"/>
+                        <input class=\"delete_button\" type=\"submit\" name=\"$log\" value=\"удалить\"/> <br>
                         <input class=\"change_button\" type=\"submit\" name=\"$log\" value=\"изменить\">
                         </form></td></tr>";
-                    }
+                    
                 }
                 } 
                 catch (PDOException $e){
                     print('ERROR : ' . $e->getMessage());
                     exit();
                 }
+
             ?>
 
         </tbody>
 
     </table>
+
+    <?php
+        try {
+            echo "<table><thead> <tr><td>LANGEAGE</td><td>Q</td></tr></thead> "
+            $stmt = $db->prepare("SELECT lang_name, count(id) AS stat FROM user_lang JOIN prog_lang USING (id_lang) GROUP BY id_lang");
+            $stmt->execute();
+            while($row = $stmt->fetch(PDO::FETCH_OBJ)){
+                echo "<tr><td>$row->lang_name</td><td>$row->stat</td></tr>";
+            }
+            echo "</table>";
+        }
+        catch (PDOException $e){
+            print('ERROR : ' . $e->getMessage());
+            exit();
+        }
+
+        //select lang_name, count(id) from user_lang join prog_lang using (id_lang) GROUP BY id_lang;
+    ?>
 
   </body>
 </html>
