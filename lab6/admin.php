@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   
   if (empty($_SERVER['PHP_AUTH_USER']) ||
       empty($_SERVER['PHP_AUTH_PW']) ||
-      !isValid($_SERVER['PHP_AUTH_USER']) ||
+      !isValid($_SERVER['PHP_AUTH_USER'], , $db) ||
       !password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db)) {
 
     header('HTTP/1.1 401 Unanthorized');
