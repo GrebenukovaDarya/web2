@@ -164,6 +164,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   if(!empty($_GET['uid'])){
     $_SESSION['uid']=htmlspecialchars($_GET["uid"]);
+    try{
+      $stmt = $db->prepare("SELECT login FROM users WHERE id=?");
+      $stmt->execute([$_SESSION['uid']]);
+      $_SESSIN['login']=$stmt;
+  }
+  catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+  }
   }
 
 // Если нет предыдущих ошибок ввода, есть кука сессии, начали сессию и
