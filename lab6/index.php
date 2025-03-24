@@ -162,12 +162,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['bdate'] = empty($_COOKIE['bdate_value']) ? '' : strip_tags($_COOKIE['bdate_value']);
   $values['checkbox'] = empty($_COOKIE['checkbox_value']) ? '' : strip_tags($_COOKIE['checkbox_value']);
 
+
+  //echo "";
   if(!empty($_GET['uid'])){
     $_SESSION['uid']=htmlspecialchars($_GET["uid"]);
     try{
       $stmt = $db->prepare("SELECT login FROM users WHERE id=?");
       $stmt->execute([$_SESSION['uid']]);
-      $_SESSIN['login']=$stmt;
+      $_SESSION['login']=$stmt;
   }
   catch(PDOException $e){
       print('Error : ' . $e->getMessage());
@@ -175,8 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   }
   }
 
-// Если нет предыдущих ошибок ввода, есть кука сессии, начали сессию и
-  // ранее в сессию записан факт успешного логина.
+
   if (/*empty($errors) &&*/ isset($_COOKIE[session_name()]) &&
       session_start() && !empty($_SESSION['login'])) {
 
