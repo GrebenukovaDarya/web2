@@ -93,9 +93,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     <a class="admin_ref" href="admin.php">Войти как администратор</a>
 
-    <?php $p=password_hash('pass', PASSWORD_DEFAULT); 
-    echo "$p"?>
-
   </body>
 </html>
 
