@@ -162,6 +162,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['bdate'] = empty($_COOKIE['bdate_value']) ? '' : strip_tags($_COOKIE['bdate_value']);
   $values['checkbox'] = empty($_COOKIE['checkbox_value']) ? '' : strip_tags($_COOKIE['checkbox_value']);
 
+  if(!empty($_GET['uid'])){
+    $_SESSION['uid']=$_GET['uid'];
+  }
+
 // Если нет предыдущих ошибок ввода, есть кука сессии, начали сессию и
   // ранее в сессию записан факт успешного логина.
   if (/*empty($errors) &&*/ isset($_COOKIE[session_name()]) &&
