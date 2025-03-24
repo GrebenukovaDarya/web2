@@ -53,14 +53,13 @@
                             echo "<td>$langs_value1</td>";
 
                         echo "<td class=\"buttons\">
-                        <form action=\" \" method=\" \">
-                        <input class=\"change_button\" type=\"submit\" name=\"$log\" value=\"изменить\">
-                        </form></td></tr>
-                        ";
+                        <form action=\" \" method=\"POST\">
+                        <input class=\"delete_button\" type=\"submit\" name=\"$log\" value=\"удалить\">
+                        </form></td></tr>";
 
-                        /*
-                        <input class=\"delete_button\" type=\"submit\" name=\"$log\" value=\"удалить\"/> <br>*/
-                    
+                        echo " <div class=\"change_button\">
+                        <a href=\"index.php/?uid=<?=htmlspecialchars($row->id)?>\">Изменить</a>
+                        </div>";
                 }
                 } 
                 catch (PDOException $e){
