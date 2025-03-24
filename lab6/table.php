@@ -58,7 +58,7 @@
                         </form></td></tr>";
 
                         echo " <div class=\"change_button\">
-                        <a href=\"index.php/?uid=<?=htmlspecialchars($row->id)?>\">Изменить</a>
+                        <a href=\"index.php?uid=<?=htmlspecialchars($row->id)?>\">Изменить</a>
                         </div>";
                 }
                 } 
