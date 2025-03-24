@@ -46,12 +46,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
     
+    $user_log=$_SERVER['PHP_AUTH_USER'];
+    $user_pass=$_SERVER['PHP_AUTH_PW'];
 
   
   if (empty($_SERVER['PHP_AUTH_USER']) ||
       empty($_SERVER['PHP_AUTH_PW']) ||
-      !isValid($_SERVER['PHP_AUTH_USER'], , $db) ||
-      !password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $db)) {
+      !isValid($user_log, $db) ||
+      !password_check($user_log, $user_pass, $db)) {
 
     header('HTTP/1.1 401 Unanthorized');
     header('WWW-Authenticate: Basic realm="My site"');
