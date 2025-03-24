@@ -163,8 +163,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['checkbox'] = empty($_COOKIE['checkbox_value']) ? '' : strip_tags($_COOKIE['checkbox_value']);
 
 
-  echo htmlspecialchars($_GET['uid']);
-  echo $_GET['uid'];
+  //echo htmlspecialchars($_GET['uid']);
+  //echo $_GET['uid'];
   if(!empty($_GET['uid'])){
     $_SESSION['uid']=htmlspecialchars($_GET["uid"]);
     try{
@@ -178,6 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   }
   }
 
+  echo $_SESSION['login'];
 
   if (/*empty($errors) &&*/ isset($_COOKIE[session_name()]) &&
       session_start() && !empty($_SESSION['login'])) {
