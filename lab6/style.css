@@ -1,5 +1,8 @@
 html{
     background-color:#fceefa;
+    font-family: "Mac";
+    letter-spacing: 1px;
+    color: #272931;
 }
 
 
@@ -33,6 +36,11 @@ html{
     border-width: 5px;
     border-color: #be8b5b;
     background-color: #eccaa6;
+}
+
+.admin_ref{
+    margin: 5px;
+    text-align:center;
 }
 
 .application{
