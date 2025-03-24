@@ -163,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values['checkbox'] = empty($_COOKIE['checkbox_value']) ? '' : strip_tags($_COOKIE['checkbox_value']);
 
   if(!empty($_GET['uid'])){
-    $_SESSION['uid']=$_GET['uid'];
+    $_SESSION['uid']=htmlspecialchars($_GET["uid"]);
   }
 
 // Если нет предыдущих ошибок ввода, есть кука сессии, начали сессию и
