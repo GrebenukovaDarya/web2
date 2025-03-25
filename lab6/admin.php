@@ -44,11 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $pass = '7232008';
   $db = new PDO('mysql:host=localhost;dbname=u68607', $user, $pass,
     [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-
     
-    $user_log=$_SERVER['PHP_AUTH_USER'];
-    $user_pass=$_SERVER['PHP_AUTH_PW'];
-
+  $user_log=$_SERVER['PHP_AUTH_USER'];
+  $user_pass=$_SERVER['PHP_AUTH_PW'];
   
   if (empty($_SERVER['PHP_AUTH_USER']) ||
       empty($_SERVER['PHP_AUTH_PW']) ||

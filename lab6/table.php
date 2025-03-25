@@ -57,9 +57,9 @@
                         <input class=\"delete_button\" type=\"submit\" name=\"$log\" value=\"удалить\">
                         </form></td></tr>";
 
-                        echo " <div class=\"change_button\">
+                        echo "<br><div class=\"change_button\">
                         <a href=\"index.php?uid=$row->id\">Изменить</a>
-                        </div>";
+                        </div></td></tr>";
                 }
                 } 
                 catch (PDOException $e){

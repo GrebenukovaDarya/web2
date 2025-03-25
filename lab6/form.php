@@ -10,7 +10,7 @@
 
     <?php 
     if(isset($_COOKIE[session_name()]) && !empty($_SESSION['login'])){
-      if(!empty($_SESSION['admin'])){
+      if(!empty($_SERVER['PHP_AUTH_USER'])){
         print('<form class="logout_form" action="admin.php" method="POST">
         <input type="submit" name="logout" value="Завершить изменения"/></form>');
       }
