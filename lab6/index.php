@@ -165,7 +165,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   //echo htmlspecialchars($_GET['uid']);
   //echo $_GET['uid'];
-  if(!empty($_GET['uid']) /* && session_start()*/){
+
+  $session_started=false;
+  if(!empty($_GET['uid']) && session_start()){
+    $session_started=true;
     $_SESSION['uid'] = htmlspecialchars($_GET["uid"]);
     try{
       $stmt = $db->prepare("SELECT login FROM users WHERE id=?");
@@ -180,7 +183,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   //echo $_SESSION['login']." CHECK";
 
-  if (isset($_COOKIE[session_name()]) && session_start() && !empty($_SESSION['login'])) {
+
+  if (isset($_COOKIE[session_name()]) && $session_started?true:session_start() && !empty($_SESSION['login'])) {
 
     try{
       $mas=[];
