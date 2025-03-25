@@ -74,8 +74,8 @@ else {
       $stmt_delete_application = $db->prepare("DELETE FROM application WHERE id=?");
       $stmt_delete_user = $db->prepare("DELETE FROM users WHERE id=?");
       $stmt_delete_lang->execute([$_POST['del_by_uid']]);
-      $stmt_delete_application->execute([$_POST['del_by_uid']]);
       $stmt_delete_user->execute([$_POST['del_by_uid']]);
+      $stmt_delete_application->execute([$_POST['del_by_uid']]);
     }
     catch(PDOException $e){
       print('Error : ' . $e->getMessage());
