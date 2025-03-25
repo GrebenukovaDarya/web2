@@ -170,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     try{
       $stmt = $db->prepare("SELECT login FROM users WHERE id=?");
       $stmt->execute([$_SESSION['uid']]);
-      $_SESSION['login']=($stmt->fetch(PDO::FETCH_ASSOC))->login;
+      $_SESSION['login']=$stmt->fetchColumn();
   }
   catch(PDOException $e){
       print('Error : ' . $e->getMessage());
@@ -178,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   }
   }
 
-  echo $_SESSION['login'];
+  echo $_SESSION['login']." CHECK";
 
   if (isset($_COOKIE[session_name()]) && session_start() && !empty($_SESSION['login'])) {
 
