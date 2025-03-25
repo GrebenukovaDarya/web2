@@ -83,5 +83,5 @@ else {
     }
   } 
 
-  header('Location: ./');
+  header('Location: admin.php');
 }
