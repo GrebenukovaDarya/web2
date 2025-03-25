@@ -53,8 +53,9 @@
                             echo "<td>$langs_value1</td>";
 
                         echo "<td class=\"buttons\">
-                        <form action=\" \" method=\"POST\">
-                        <input class=\"delete_button\" type=\"submit\" name=\"$log\" value=\"удалить\">
+                        <form action=\"admin.php\" method=\"POST\">
+                        <input type=\"hidden\" name=\"del_by_uid\" value=\"$uid\">
+                        <input class=\"delete_button\" type=\"submit\" value=\"удалить\">
                         </form>";
 
                         echo "<br><div class=\"change_button\">

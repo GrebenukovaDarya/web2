@@ -37,7 +37,6 @@ function password_check($login, $password, $db) {
 }
 
 
-
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   $user = 'u68607';
@@ -65,4 +64,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 else {
 
+  if(!empty($_POST['del_by_uid'])){
+    try{
+      $stmt_delete_lang = $db->prepare("DELETE FROM user_lang WHERE id=?");
+      $stmt_delete_application = $db->prepare("DELETE FROM application WHERE id=?");
+      $stmt_delete_user = $db->prepare("DELETE FROM users WHERE id=?");
+      $stmt_delete_lang->execute([$_POST['del_by_uid']]);
+      $stmt_delete_application->execute([$_POST['del_by_uid']]);
+      $stmt_delete_user->execute([$_POST['del_by_uid']]);
+    }
+    catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
+  } 
 }
