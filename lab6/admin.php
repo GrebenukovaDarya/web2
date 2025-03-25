@@ -82,4 +82,6 @@ else {
       exit();
     }
   } 
+
+  header('Location: ./');
 }
