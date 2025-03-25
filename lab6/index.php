@@ -165,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   //echo htmlspecialchars($_GET['uid']);
   //echo $_GET['uid'];
-  if(!empty($_GET['uid'])){
+  if(!empty($_GET['uid']) && session_start() ){
     $_SESSION['uid']=htmlspecialchars($_GET["uid"]);
     try{
       $stmt = $db->prepare("SELECT login FROM users WHERE id=?");
