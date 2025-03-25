@@ -55,7 +55,7 @@
                         echo "<td class=\"buttons\">
                         <form action=\" \" method=\"POST\">
                         <input class=\"delete_button\" type=\"submit\" name=\"$log\" value=\"удалить\">
-                        </form></td></tr>";
+                        </form>";
 
                         echo "<br><div class=\"change_button\">
                         <a href=\"index.php?uid=$row->id\">Изменить</a>
