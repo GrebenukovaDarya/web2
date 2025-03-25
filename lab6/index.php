@@ -166,11 +166,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   //echo htmlspecialchars($_GET['uid']);
   //echo $_GET['uid'];
   if(!empty($_GET['uid']) && session_start() ){
-    $_SESSION['uid']=htmlspecialchars($_GET["uid"]);
+    $_SESSION['uid'] = htmlspecialchars($_GET["uid"]);
     try{
       $stmt = $db->prepare("SELECT login FROM users WHERE id=?");
       $stmt->execute([$_SESSION['uid']]);
-      $_SESSION['login']=$stmt;
+      $_SESSION['login']=($stmt->fetch(PDO::FETCH_ASSOC))->login;
   }
   catch(PDOException $e){
       print('Error : ' . $e->getMessage());
@@ -180,9 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   echo $_SESSION['login'];
 
-  if (/*empty($errors) &&*/ isset($_COOKIE[session_name()]) &&
-      session_start() && !empty($_SESSION['login'])) {
-
+  if (isset($_COOKIE[session_name()]) && session_start() && !empty($_SESSION['login'])) {
 
     try{
       $mas=[];
