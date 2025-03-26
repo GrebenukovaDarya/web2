@@ -167,13 +167,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   //echo $_GET['uid'];
 
   $session_started=false;
-  if(session_start() && !empty($_GET['uid'])){
+  if(session_start() && !empty($_GET['uid']) && !empty($_SERVER['PHP_AUTH_USER'])){
     $session_started=true;
     $_SESSION['uid'] = htmlspecialchars($_GET["uid"]);
     try{
       $stmt = $db->prepare("SELECT login FROM users WHERE id=?");
       $stmt->execute([$_SESSION['uid']]);
       $_SESSION['login']=$stmt->fetchColumn();
+
+      ////
+      setcookie('session_name', '1', time() + 24 * 60 * 60);
+      /////
   }
   catch(PDOException $e){
       print('Error : ' . $e->getMessage());
