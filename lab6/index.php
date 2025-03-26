@@ -167,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   //echo $_GET['uid'];
 
   $session_started=false;
-  if(!empty($_GET['uid']) && session_start()){
+  if(session_start() && !empty($_GET['uid']) && session_start()){
     $session_started=true;
     $_SESSION['uid'] = htmlspecialchars($_GET["uid"]);
     try{
@@ -181,7 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   }
   }
 
-  if (isset($_COOKIE[session_name()]) && $session_started?true:session_start() && !empty($_SESSION['login'])) {
+  if (isset($_COOKIE[session_name()]) /*&& $session_started?true:session_start()*/ && !empty($_SESSION['login'])) {
 
     try{
       $mas=[];
