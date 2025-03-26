@@ -167,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   //echo $_GET['uid'];
 
   $session_started=false;
-  if(session_start() && !empty($_GET['uid']) && session_start()){
+  if(session_start() && !empty($_GET['uid'])){
     $session_started=true;
     $_SESSION['uid'] = htmlspecialchars($_GET["uid"]);
     try{
