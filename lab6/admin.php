@@ -68,7 +68,7 @@ else {
   $db = new PDO('mysql:host=localhost;dbname=u68607', $user, $pass,
     [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
     
-  if(!empty($_POST['del_by_uid'])){
+  if(!empty($_POST['del_by_uid']) && !empty($_SERVER['PHP_AUTH_USER'])){
     try{
       $stmt_delete_lang = $db->prepare("DELETE FROM user_lang WHERE id=?");
       $stmt_delete_application = $db->prepare("DELETE FROM application WHERE id=?");
