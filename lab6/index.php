@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 header('Content-Type: text/html; charset=UTF-8');
 
@@ -166,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   //echo htmlspecialchars($_GET['uid']);
   //echo $_GET['uid'];
 
-  session_start();
+  
   //setcookie('PHPSESSID', '1', time() + 24 * 60 * 60);
   
   $session_started=false;
