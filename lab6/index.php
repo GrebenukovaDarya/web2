@@ -187,6 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   }
   }
 
+   echo $_SESSION['login']."  CHECK    ".$COOKIE[session_name()];
 
   if (isset($_COOKIE[session_name()]) /*&& $session_started?true:session_start()*/ && !empty($_SESSION['login'])) {
 
