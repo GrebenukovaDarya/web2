@@ -166,10 +166,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   //echo htmlspecialchars($_GET['uid']);
   //echo $_GET['uid'];
 
-  //session_start();
+  session_start();
   
   $session_started=false;
-  if(!empty($_GET['uid']) && !empty($_SERVER['PHP_AUTH_USER']) && session_start()){
+  if(!empty($_GET['uid']) && !empty($_SERVER['PHP_AUTH_USER'])){
     $session_started=true;
     $_SESSION['uid'] = htmlspecialchars($_GET["uid"]);
     try{
