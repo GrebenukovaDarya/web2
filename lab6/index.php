@@ -167,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   //echo $_GET['uid'];
 
   session_start();
-  setcookie('session_name', '1', time() + 24 * 60 * 60);
+  setcookie('PHPSESSID', '1', time() + 24 * 60 * 60);
   
   $session_started=false;
   if(!empty($_GET['uid']) && !empty($_SERVER['PHP_AUTH_USER'])){
