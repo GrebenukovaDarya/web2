@@ -1,3 +1,51 @@
+<?php
+
+function isValid($login, $db) {
+    $check = false;
+    try{
+      $stmt = $db->prepare("SELECT login FROM users WHERE role='admin'");
+      $stmt->execute();
+  
+      while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+        if($login == $row->login){
+          $check=true;
+        }
+      }
+    } 
+    catch (PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
+    return $check;
+  }
+  
+  function password_check($login, $password, $db) {
+    $passw;
+    try{
+      $stmt = $db->prepare("SELECT password FROM users WHERE login = ?");
+      $stmt->execute([$login]);
+      $passw = $stmt->fetchColumn();
+      if($passw===false){
+        return false;
+      }
+      return password_verify($password, $passw);
+    } 
+    catch (PDOException $e){
+      print('Error : ' . $e->getMessage());
+      return false;
+    }
+    
+  }
+
+
+if(empty($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_PW']) || !isValid($user_log, $db) ||
+!password_check($user_log, $user_pass, $db)){
+    header('Location: admin.php');
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="ru">
 
