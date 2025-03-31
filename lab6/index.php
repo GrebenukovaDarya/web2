@@ -167,6 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   //echo $_GET['uid'];
 
   session_start();
+  setcookie('session_name', '1', time() + 24 * 60 * 60);
   
   $session_started=false;
   if(!empty($_GET['uid']) && !empty($_SERVER['PHP_AUTH_USER'])){
@@ -177,9 +178,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       $stmt->execute([$_SESSION['uid']]);
       $_SESSION['login']=$stmt->fetchColumn();
 
-      ////
-      //setcookie('session_name', '1', time() + 24 * 60 * 60);
-      /////
+      
+      
   }
   catch(PDOException $e){
       print('Error : ' . $e->getMessage());
@@ -187,12 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   }
   }
 
-  //echo $_SESSION['login']."   CHECK    ".$_COOKIE[session_name()];
-  /*
-  if($session_started==true){
-    session_start();
-  }
-*/
+
   if (isset($_COOKIE[session_name()]) /*&& $session_started?true:session_start()*/ && !empty($_SESSION['login'])) {
 
     try{
@@ -225,32 +220,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             exit();
         }
 
-    /*
-    try {
-      $get_lang=[];
-      $mas=[];
-      $stmt_lang = $db->prepare("SELECT id_lang FROM user_lang WHERE id = ?");
-      $stmt_lang->execute([$_SESSION['uid']]);
-      $mas = $stmt_lang->fetch(PDO::FETCH_ASSOC);
-
-      $stmt_get_lang = $db->prepare("SELECT lang_name FROM prog_lang WHERE id_lang=?");
-
-      foreach ($mas as $id) {
-        
-          $stmt_get_lang->execute([$id]);
-          $lang_name = $stmt_get_lang->fetchColumn();
-          $get_lang = $lang_name;
-      }
-          
-      $values['lang'] = $get_lang;
-  } catch (PDOException $e){
-      print('Error : ' . $e->getMessage());
-      exit();
-  }*/
-
     $login_message='Вход с логином: '. $_SESSION['login'] . ", uid: ". $_SESSION['uid'];
-    $messages[] = $login_message; //('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
-    //printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
+    $messages[] = $login_message;
   }
 
   include('form.php');
@@ -486,9 +457,3 @@ else {
   header('Location: ./');
 
 }
-
-//52083a9dcc9b0304
-//6173DiOvzgJf
-
-//d59a9a9fd70f779d
-//9gyP76FD4wWG
