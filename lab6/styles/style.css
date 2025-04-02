@@ -98,6 +98,10 @@ select{
     border: 3px solid rgb(206, 86, 122);
     background-color: #febbcb;
   }
+  .login_error_message {
+    border: 3px solid rgb(184, 118, 60);
+    background-color: #ffefb0;
+  }
 
 .logout_form{
     max-width: 20%;
@@ -146,7 +150,6 @@ select{
     border-width: 4px;
     border-color: #6f4d9f;
 }
-
 
 @font-face {
     font-family: "Mac";

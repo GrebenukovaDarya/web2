@@ -29,7 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 else {
   $login_messages='';
   $login = $_POST['login'];
-  //$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
   $password=$_POST['password'];
 
   $user = 'u68607';
@@ -57,8 +56,7 @@ else {
       header('Location: ./');
   }
   else {
-    print('Неверный логин или пароль'); 
+    echo "<div class=\"login_error_message\"> Неверный логин или пароль </div>"; 
   }
-
 
 }
