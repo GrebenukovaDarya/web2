@@ -133,9 +133,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
   }
   if (isset($_COOKIE[session_name()]) && session_start() &&!empty($_SESSION['login'])) { 
-    $values=INSERTData($_SESSION['login'], $db);
+    $values=INSERTData($_SESSION['login']);
     $login_message='Вход с логином: '. $_SESSION['login'] . ", uid: ". $_SESSION['uid'];
     $messages[] = $login_message;
+
+    echo 
   }
   /*
 
