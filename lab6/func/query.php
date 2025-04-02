@@ -73,15 +73,15 @@ function users_table(){
     return $rows;
 }
 
-function delete_by_uid($uid){
+function del_by_uid($uid){
     global $db;
     try{
         $stmt_delete_lang = $db->prepare("DELETE FROM user_lang WHERE id=?");
         $stmt_delete_application = $db->prepare("DELETE FROM application WHERE id=?");
         $stmt_delete_user = $db->prepare("DELETE FROM users WHERE id=?");
-        $stmt_delete_lang->execute($uid);
-        $stmt_delete_user->execute($uid);
-        $stmt_delete_application->execute($uid);
+        $stmt_delete_lang->execute([$uid]);
+        $stmt_delete_user->execute([$uid]);
+        $stmt_delete_application->execute([$uid]);
       }
       catch(PDOException $e){
         print('Error : ' . $e->getMessage());

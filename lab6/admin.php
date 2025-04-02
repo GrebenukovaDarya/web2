@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 else {
 
   if(!empty($_POST['del_by_uid']) && !empty($_SERVER['PHP_AUTH_USER'])){
-    delete_by_uid($_POST['del_by_uid']);
+    del_by_uid($_POST['del_by_uid']);
     /*
       try{
         $stmt_delete_lang = $db->prepare("DELETE FROM user_lang WHERE id=?");
