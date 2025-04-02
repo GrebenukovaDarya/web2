@@ -82,10 +82,10 @@ function del_by_uid($uid){
         $stmt_delete_user->execute([$uid]);
         $stmt_delete_application->execute([$uid]);
       }
-      catch(PDOException $e){
+    catch(PDOException $e){
         print('Error : ' . $e->getMessage());
         exit();
-      }
+    }
 }
 
 function getUID($login){
