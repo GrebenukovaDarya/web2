@@ -310,7 +310,7 @@ else {
 
     if (isset($_COOKIE[session_name()]) && session_start() && !empty($_SESSION['login'])) {
       try {
-        $user_id=getUID($login);
+        $user_id=getUID($_SESSION['login']);
         UPDATE($user_id, $_POST['fio'], $_POST['number'], $_POST['email'], $_POST['birthdate'], $_POST['radio-group-1'], $_POST['biography'], isset($_POST["checkbox"]) ? 1 : 0, $languages);
       }
       catch(PDOException $e){
