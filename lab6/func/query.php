@@ -99,7 +99,7 @@ function getUID($login){
         print('Error : ' . $e->getMessage());
         exit();
     }
-    return uid;
+    return $uid;
 }
 
 ?>
