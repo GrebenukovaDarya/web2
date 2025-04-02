@@ -154,6 +154,7 @@ function INSERT($login, $hash_password){
     try{
         $stmt_select = $db->prepare("SELECT id_lang FROM prog_lang WHERE lang_name = ?");
         $stmt_insert = $db->prepare("INSERT INTO user_lang (id, id_lang) VALUES (?, ?)");
+        $languages = $_POST['languages'] ?? [];
         foreach ($languages as $language) {
           $stmt_select ->execute([$language]);
           $id_lang = $stmt_select->fetchColumn();
