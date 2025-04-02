@@ -86,7 +86,7 @@ if(empty($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_PW']) || !isVali
         </thead> 
         <tbody>
             <?php
-                foreach($rows as $row){
+                foreach($language_table as $row){
                     echo $row;
                 }
             /*
@@ -102,6 +102,7 @@ if(empty($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_PW']) || !isVali
                     exit();
                 }*/
             ?>
-        </table>
+        </tbody>
+    </table>
   </body>
 </html>

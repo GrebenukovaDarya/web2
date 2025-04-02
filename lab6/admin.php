@@ -63,7 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   print('<div class="">Вы успешно авторизовались и видите защищенные паролем данные.<div>');
 
-  $rows = language_stats($db);
+  $language_table = language_stats();
+  $user_table = users_table();
 
   include('table.php');
 }
