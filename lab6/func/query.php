@@ -182,7 +182,7 @@ function INSERTData($login){
     try{
         $mas=[];
         $stmt = $db->prepare("SELECT fio, number, email, biography AS bio, gender AS gen, bdate, checkbox FROM application WHERE id = ?");
-        $stmt->execute($uid);
+        $stmt->execute([$uid]);
         $mas = $stmt->fetch(PDO::FETCH_ASSOC);
         $fields = ['fio', 'number', 'email', 'bio', 'gen', 'bdate', 'checkbox'];
         foreach($fields as $field) {
