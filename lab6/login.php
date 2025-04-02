@@ -31,27 +31,13 @@ else {
   $login = $_POST['login'];
   $password=$_POST['password'];
 
-  $user = 'u68607';
-  $pass = '7232008';
-  $db = new PDO('mysql:host=localhost;dbname=u68607', $user, $pass,
-    [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-
   if (!$session_started) {
     session_start();
   }
 
-  if (isValid($login, $db) && password_check($login, $password, $db)){
+  if (isValid($login) && password_check($login, $password)){
     $_SESSION['login'] = $_POST['login'];
-
-    $_SESSION['uid'];
-      try {
-          $stmt_select = $db->prepare("SELECT id FROM users WHERE login=?");
-          $stmt_select->execute([$_SESSION['login']]);
-          $_SESSION['uid']  = $stmt_select->fetchColumn();
-      } catch (PDOException $e){
-          print('Error : ' . $e->getMessage());
-          exit();
-      }
+    $_SESSION['uid'] = getUID([$_SESSION['login']]);
 
       header('Location: ./');
   }

@@ -88,4 +88,18 @@ function del_by_uid($uid){
       }
 }
 
+function getUID($login){
+    global $db;
+    $uid;
+    try {
+        $stmt_select = $db->prepare("SELECT id FROM users WHERE login=?");
+        $stmt_select->execute([$login]);
+        $uid = $stmt_select->fetchColumn();
+    } catch (PDOException $e){
+        print('Error : ' . $e->getMessage());
+        exit();
+    }
+    return uid;
+}
+
 ?>
