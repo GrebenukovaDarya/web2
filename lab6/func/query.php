@@ -178,7 +178,7 @@ function INSERT($login, $hash_password){
 function INSERTData($login){
     global $db;
     $uid=getUID($login);
-
+    $values = array();
     try{
         $mas=[];
         $stmt = $db->prepare("SELECT fio, number, email, biography AS bio, gender AS gen, bdate, checkbox FROM application WHERE id = ?");
@@ -204,5 +204,6 @@ function INSERTData($login){
         print('Error : ' . $e->getMessage());
         exit();
     }
+    return $values;
 }
 ?>
