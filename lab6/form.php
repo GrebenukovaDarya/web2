@@ -35,12 +35,12 @@
 
     </div>
 
-    <input type="hidden" name="uid" value='<?php print $values['uid'];?>' />
-
     <div class="formstyle" > 
       <form id="myform" class="application" action="index.php" method="POST">
 
         <h2> ФОРМА </h2> 
+
+      <input type="hidden" name="uid" value='<?php print $values['uid'];?>' />
 
       <label> 
         ФИО: <br/>
