@@ -7,7 +7,7 @@ $db = new PDO('mysql:host=localhost;dbname=u68607', $user, $pass,
     [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
 
-function language_stats(){
+function language_stats($db){
     $rows = array();
     try {
         $stmt = $db->prepare("SELECT lang_name, count(id) AS stat FROM user_lang JOIN prog_lang USING (id_lang) GROUP BY id_lang");
