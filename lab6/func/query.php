@@ -176,6 +176,7 @@ function INSERT($login, $hash_password){
 }
 
 function INSERTData($login){
+    global $db;
     $uid=getUID($login);
 
     try{
