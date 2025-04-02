@@ -35,6 +35,7 @@
 
     </div>
 
+    <input type="hidden" name="uid" value='<?php print $values['uid'];?>' />
 
     <div class="formstyle" > 
       <form id="myform" class="application" action="index.php" method="POST">
