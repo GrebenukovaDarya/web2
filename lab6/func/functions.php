@@ -17,7 +17,6 @@ function password_check($login, $password) {
       return false;
     }
 }
-
 function admin_password_check($login, $password) {
     global $db;
     $passw;
@@ -53,6 +52,19 @@ function admin_login_check($login) {
       exit();
     }
     return $check;
-  }
-
+}
+function isValid($login) {
+    global $db;
+    $count;
+    try{
+      $stmt = $db->prepare("SELECT COUNT(*) FROM users WHERE login = ?");
+      $stmt->execute([$login]);
+      $count = $stmt->fetchColumn();
+    } 
+    catch (PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
+    return $count > 0;
+}
 ?>

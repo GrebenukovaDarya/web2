@@ -2,40 +2,8 @@
 <?php
 header('Content-Type: text/html; charset=UTF-8');
 
-function isValid($login, $db) {
-  $count;
-  try{
-    $stmt = $db->prepare("SELECT COUNT(*) FROM users WHERE login = ?");
-    $stmt->execute([$login]);
-    $count = $stmt->fetchColumn();
-  } 
-  catch (PDOException $e){
-    print('Error : ' . $e->getMessage());
-    exit();
-  }
-  return $count > 0;
-}
-
-function password_check($login, $password, $db) {
-  $passw;
-  try{
-    $stmt = $db->prepare("SELECT password FROM users WHERE login = ?");
-    $stmt->execute([$login]);
-    $passw = $stmt->fetchColumn();
-    //print($password);
-    if($passw===false){
-      return false;
-    }
-    //print(" ");
-    //print($passw);
-    return password_verify($password, $passw);
-  } 
-  catch (PDOException $e){
-    print('Error : ' . $e->getMessage());
-    return false;
-  }
-  
-}
+require_once 'func/query.php';
+require_once 'func/functions.php';
 
 $session_started = false;
 
@@ -50,55 +18,14 @@ if (isset($_COOKIE[session_name()]) && session_start()) {
       exit();
     }
 
-
     header('Location: ./');
     exit();
   }
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-  
-?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  href="style.css">
-    <title> LAB5 </title>
-  </head>
-  <body>
-
-  <?php
-      if (!empty($messages)) {
-        print('<div id="login_messages">');
-        foreach ($messages as $message) {
-          print($message);
-        }
-        print('</div>');
-      }
-      ?>
-
-    <form class="login_form" action="" method="post">
-      <label> 
-        Логин <br/>
-        <input name="login" />
-      </label> <br/>
-      <label> 
-        Пароль <br/>
-        <input name="password" />
-      </label> <br/>
-      <input class="login_button" type="submit" value="Войти" />
-    </form>
-
-    <a class="admin_ref" href="admin.php">Войти как администратор</a>
-
-  </body>
-</html>
-
-<?php
+  include('login_page.php');
 }
-
 else {
   $login_messages='';
   $login = $_POST['login'];

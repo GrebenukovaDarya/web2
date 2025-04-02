@@ -6,7 +6,6 @@ $pass = '7232008';
 $db = new PDO('mysql:host=localhost;dbname=u68607', $user, $pass,
     [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
-
 function language_stats(){
     global $db;
     $rows = array();
