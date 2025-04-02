@@ -28,6 +28,10 @@ if(empty($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_PW']) || !isVali
 
         <tbody>
             <?php
+                foreach($user_table as $row){
+                    echo $row;
+                }
+            /*
                 $user = 'u68607';
                 $pass = '7232008';
                 $db = new PDO('mysql:host=localhost;dbname=u68607', $user, $pass,
@@ -75,7 +79,7 @@ if(empty($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_PW']) || !isVali
                     print('ERROR : ' . $e->getMessage());
                     exit();
                 }
-
+            */
             ?>
         </tbody>
     </table>
