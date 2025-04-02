@@ -93,7 +93,7 @@ function getUID($login){
     $uid;
     try {
         $stmt_select = $db->prepare("SELECT id FROM users WHERE login=?");
-        $stmt_select->execute([$login]);
+        $stmt_select->execute($login);
         $uid = $stmt_select->fetchColumn();
     } catch (PDOException $e){
         print('Error : ' . $e->getMessage());
