@@ -137,7 +137,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $login_message='Вход с логином: '. $_SESSION['login'] . ", uid: ". $_SESSION['uid'];
     $messages[] = $login_message;
 
-    echo 
   }
   /*
 
