@@ -35,7 +35,7 @@ function users_table(){
         while($row = $stmt->fetch(PDO::FETCH_OBJ)){
             $log=$row->login;
             $uid=$row->id;
-            string $r = "<tr><td>$uid</td><td>$log</td>";
+            $r = "<tr><td>$uid</td><td>$log</td>";
 
             $form_data = $db->prepare("SELECT fio, number, email, gender AS gen, biography AS bio, bdate, checkbox FROM application WHERE id = ?");
             $form_data->execute([$uid]);
