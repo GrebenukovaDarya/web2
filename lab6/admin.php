@@ -1,6 +1,6 @@
 <?php
 
-require_once '/query.php';
+require_once 'func/query.php';
 
 function isValid($login, $db) {
   $check = false;
