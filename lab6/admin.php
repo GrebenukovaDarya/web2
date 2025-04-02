@@ -1,4 +1,7 @@
 <?php
+
+require 'func.php';
+
 function isValid($login, $db) {
   $check = false;
   try{
@@ -59,6 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   }
 
   print('<div class="">Вы успешно авторизовались и видите защищенные паролем данные.<div>');
+
+  $rows = language_stats();
 
   include('table.php');
 }

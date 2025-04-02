@@ -6,8 +6,6 @@ if(empty($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_PW']) || !isVali
 }
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -82,20 +80,28 @@ if(empty($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_PW']) || !isVali
         </tbody>
     </table>
 
-    <?php
-        try {
-            echo "<table><thead> <tr><td>LANGUAGE</td><td>Q</td></tr></thead> ";
-            $stmt = $db->prepare("SELECT lang_name, count(id) AS stat FROM user_lang JOIN prog_lang USING (id_lang) GROUP BY id_lang");
-            $stmt->execute();
-            while($row = $stmt->fetch(PDO::FETCH_OBJ)){
-                echo "<tr><td>$row->lang_name</td><td>$row->stat</td></tr>";
-            }
-            echo "</table>";
-        }
-        catch (PDOException $e){
-            print('ERROR : ' . $e->getMessage());
-            exit();
-        }
-    ?>
+    <table>
+        <thead> 
+            <tr><td>LANGUAGE</td><td>Q</td></tr>
+        </thead> 
+        <tbody>
+            <?php
+                foreach($rows as $row){
+                    echo $row;
+                }
+            /*
+                try {
+                    $stmt = $db->prepare("SELECT lang_name, count(id) AS stat FROM user_lang JOIN prog_lang USING (id_lang) GROUP BY id_lang");
+                    $stmt->execute();
+                    while($row = $stmt->fetch(PDO::FETCH_OBJ)){
+                        echo "<tr><td>$row->lang_name</td><td>$row->stat</td></tr>";
+                    }
+                }
+                catch (PDOException $e){
+                    print('ERROR : ' . $e->getMessage());
+                    exit();
+                }*/
+            ?>
+        </table>
   </body>
 </html>
