@@ -1,5 +1,4 @@
 <?php
-
 if(empty($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_PW']) || !isValid($user_log, $db) ||
 !password_check($user_log, $user_pass, $db)){
     header('Location: admin.php');
