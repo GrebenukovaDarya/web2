@@ -93,7 +93,7 @@ function getUID($login){
     $uid;
     try {
         $stmt_select = $db->prepare("SELECT id FROM users WHERE login=?");
-        $stmt_select->execute($login);
+        $stmt_select->execute([$login]);
         $uid = $stmt_select->fetchColumn();
     } catch (PDOException $e){
         print('Error : ' . $e->getMessage());
@@ -106,7 +106,7 @@ function getlogin($uid){
     $login;
     try {
         $stmt_select = $db->prepare("SELECT login FROM users WHERE id=?");
-        $stmt_select->execute($uid);
+        $stmt_select->execute([$uid]);
         $login = $stmt_select->fetchColumn();
     } catch (PDOException $e){
         print('Error : ' . $e->getMessage());
