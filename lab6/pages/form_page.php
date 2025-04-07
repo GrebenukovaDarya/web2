@@ -37,6 +37,8 @@
 
         <h2> ФОРМА </h2> 
 
+        <input type="hidden" name="uid" value='<?php print $values['uid'];?>' />
+        
       <label> 
         ФИО: <br/>
         <input name="fio" <?php if ($errors['fio'] ) {print 'class="error"';} ?> value="<?php print $values['fio']; ?>" />
