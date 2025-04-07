@@ -33,7 +33,7 @@
 
 
     <div class="formstyle" > 
-      <form id="myform" class="application" action="" method="POST">
+      <form id="myform" class="application" action="./index.php" method="POST">
 
         <h2> ФОРМА </h2> 
 
