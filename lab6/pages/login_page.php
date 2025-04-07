@@ -8,7 +8,7 @@
   </head>
   <body>
 
-    <form class="login_form" action="/login.php" method="post">
+    <form class="login_form" action="" method="post">
       <label> 
         Логин <br/>
         <input name="login" />
