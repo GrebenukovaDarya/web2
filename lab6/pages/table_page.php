@@ -11,7 +11,7 @@ if(empty($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_PW']) || !admin_
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  href="/styles/table_style.css"> 
+    <link rel="stylesheet"  href="./styles/table_style.css"> 
     <meta http-equiv="refresh"/>
     <title> ADMIN </title>
   </head>
