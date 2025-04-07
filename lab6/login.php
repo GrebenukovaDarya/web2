@@ -24,7 +24,7 @@ if (isset($_COOKIE[session_name()]) && session_start()) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-  include('login_page.php');
+  include('pages/login_page.php');
 }
 else {
   $login_messages='';
