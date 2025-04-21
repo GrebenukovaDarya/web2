@@ -105,6 +105,9 @@
       </label> <br/>
 
       <input type="submit" value="Сохранить"/> 
+
+
+        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(generateCsrfToken()); ?>">
       </form>
     </div>
 
