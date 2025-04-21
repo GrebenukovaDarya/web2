@@ -84,4 +84,67 @@ function getLangs(){
     }
 }
 
+
+
+function generateCsrfToken() {
+  if (function_exists('random_bytes')) {
+    $token = bin2hex(random_bytes(32));
+  } else {
+    $token = md5(uniqid(rand(), true)); 
+  }
+  $_SESSION['csrf_token'] = $token;
+  $_SESSION['csrf_token_time'] = time();
+  return $token;
+}
+
+function validateCsrfToken() {
+  if (empty($_POST['csrf_token'])) {
+    return false; 
+  }
+
+  if (empty($_SESSION['csrf_token'])) {
+    return false; 
+  }
+
+  if ($_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+    return false; 
+  }
+
+  $token_age = time() - $_SESSION['csrf_token_time'];
+  if ($token_age > 3600) {
+    return false; 
+  }
+
+  unset($_SESSION['csrf_token']); 
+  unset($_SESSION['csrf_token_time']);
+
+  return true;
+}
+
+function generateCsrfToken2($form_id) {
+  if (!isset($_SESSION['csrf_tokens'])) {
+      $_SESSION['csrf_tokens'] = [];
+  }
+if (empty($_SESSION['csrf_token'])){
+  $_SESSION['csrf_tokens'][$form_id] = bin2hex(random_bytes(32));
+}
+  
+  return $_SESSION['csrf_tokens'][$form_id];
+}
+
+
+function validateCsrfToken2($form_id, $token) {
+  if (!isset($_SESSION['csrf_tokens'][$form_id])) {
+      return false; // Нет токена для этой формы
+  }
+
+  if (!hash_equals($_SESSION['csrf_tokens'][$form_id], $token)) {
+      return false; // Токены не совпадают
+  }
+
+  unset($_SESSION['csrf_tokens'][$form_id]); // Удаляем токен только для этой формы
+
+  return true;
+}
+
 ?>
