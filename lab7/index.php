@@ -136,7 +136,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $_SESSION['uid']=getUID($_SESSION['login']);
 
     $values=INSERTData($_SESSION['login']);
-    $login_message='Вход с логином: '. $_SESSION['login'] . ", uid: ". $_SESSION['uid'];
+    
+    $login_message='Успешная авторизация'; //'Вход с логином: '. $_SESSION['login'] . ", uid: ". $_SESSION['uid'];
     $messages[] = $login_message;
   }
   /*
