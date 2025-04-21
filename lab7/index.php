@@ -327,8 +327,8 @@ else {
       $password = substr(str_shuffle($permitted_chars), 0, 12);
       $hash_password = password_hash($password, PASSWORD_DEFAULT);
       
-      setcookie('login', $login);
-      setcookie('password', $password);
+      setcookie('login', htmlspecialchars($login, ENT_QUOTES, 'UTF-8'));
+      setcookie('password', htmlspecialchars($password, ENT_QUOTES, 'UTF-8'));
       try {
         INSERT($login, $hash_password);
       }
