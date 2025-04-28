@@ -184,9 +184,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 else {
 
   if (!validateCsrfToken()) {
-      http_response_code(403); 
-      die('CSRF token validation failed.');
-    }
+    http_response_code(403); 
+   
+  }
 
   $fio = $_POST['fio'];
   $num = $_POST['number'];

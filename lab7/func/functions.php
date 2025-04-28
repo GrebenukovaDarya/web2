@@ -84,7 +84,7 @@ function getLangs(){
     }
 }
 
-
+/*------------------------------*/
 
 function generateCsrfToken() {
   if (function_exists('random_bytes')) {
@@ -132,19 +132,17 @@ if (empty($_SESSION['csrf_token'])){
   return $_SESSION['csrf_tokens'][$form_id];
 }
 
-
 function validateCsrfToken2($form_id, $token) {
   if (!isset($_SESSION['csrf_tokens'][$form_id])) {
-      return false; // Нет токена для этой формы
+      return false;
   }
 
   if (!hash_equals($_SESSION['csrf_tokens'][$form_id], $token)) {
-      return false; // Токены не совпадают
+      return false;
   }
 
-  unset($_SESSION['csrf_tokens'][$form_id]); // Удаляем токен только для этой формы
+  unset($_SESSION['csrf_tokens'][$form_id]);
 
   return true;
 }
-
 ?>

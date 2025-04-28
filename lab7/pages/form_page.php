@@ -9,6 +9,9 @@
   <body>
 
     <?php 
+    require_once 'func/query.php';
+    require_once 'func/functions.php';
+
     if(isset($_COOKIE[session_name()]) && !empty($_SESSION['login'])){
       
         print('<form class="logout_form" action="./login.php" method="POST">
@@ -35,11 +38,11 @@
     <div class="formstyle" > 
       <form id="myform" class="application" action="./index.php" method="POST">
 
-        <h2> ФОРМА </h2> 
+        <h2> ФОРМА </h2>
 
         <input type="hidden" name="uid" value='<?php print $values['uid'];?>' />
         
-      <label> 
+      <label>
         ФИО: <br/>
         <input name="fio" <?php if ($errors['fio'] ) {print 'class="error"';} ?> value="<?php print $values['fio']; ?>" />
       </label> <br/>
@@ -75,7 +78,7 @@
       $user_languages = explode(",",  $values['lang']);
       ?>
 
-      <label > 
+      <label> 
         Любимый язык программирования: <br/>
         <select  name="languages[]" multiple="multiple" 
         <?php if ($errors['lang']) {print 'class="error"';} ?> >
@@ -106,8 +109,8 @@
 
       <input type="submit" value="Сохранить"/> 
 
-
-        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(generateCsrfToken()); ?>">
+      <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(generateCsrfToken()); ?>">
+      
       </form>
     </div>
 
