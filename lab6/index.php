@@ -275,9 +275,17 @@ else {
 
 
   if ($errors) {
-    header('Location: index.php');
+    if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW']) &&
+    admin_login_check($_SERVER['PHP_AUTH_USER']) && admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']))
+  {
+    header('Location: index.php?uid=' . $_POST['uid'] . '');
     exit();
   }
+  else{
+    header('Location: index.php');
+      exit();
+  }
+}
   else {
     setcookie('fio_error', '', 100000);
     setcookie('number_error', '', 100000);
@@ -291,6 +299,7 @@ else {
 
 
     // Проверяем меняются ли ранее сохраненные данные или отправляются новые.
+    
 
   if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW']) &&
   admin_login_check($_SERVER['PHP_AUTH_USER']) && admin_password_check($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
@@ -304,6 +313,7 @@ else {
       exit();
     } else{
       print('Пользователь для изменения не выбран');
+      exit();
     }
   
   } else {
